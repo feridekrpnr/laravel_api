@@ -14,6 +14,9 @@ class CreateTuketilenBesinlerKaloriHesaplamaTable extends Migration
     public function up()
     {
         Schema::create('tuketilen_besinler_kalori_hesaplama', function (Blueprint $table) {
+            $table->charset = 'utf8mb4';
+            $table->collation = 'utf8mb4_turkish_ci';
+            $table->engine = 'InnoDB';
             $table->id();
             $table->unsignedBigInteger('tuketilen_besin_id');
             $table->unsignedBigInteger('kalori_hesaplama_id');

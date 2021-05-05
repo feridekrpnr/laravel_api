@@ -14,11 +14,13 @@ class CreateKaloriHesaplamaTable extends Migration
     public function up()
     {
         Schema::create('kalori_hesaplama', function (Blueprint $table) {
-
+            $table->charset = 'utf8mb4';
+            $table->collation = 'utf8mb4_turkish_ci';
+            $table->engine = 'InnoDB';
             $table->id();
             $table->string('tuketilen_kalori',70);
             $table->unsignedBigInteger('oneri_id');
-            //$table->foreign('oneri_id')->references('id')->on('oneriler');
+            $table->foreign('oneri_id')->references('id')->on('oneriler');
             $table->unsignedBigInteger('tuketilen_besin_id');
             //$table->foreign('tuketilen_besin_id')->references('id')->on('tuketilen_besinler');
 

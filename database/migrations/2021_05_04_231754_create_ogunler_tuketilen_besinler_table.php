@@ -14,6 +14,9 @@ class CreateOgunlerTuketilenBesinlerTable extends Migration
     public function up()
     {
         Schema::create('ogunler_tuketilen_besinler', function (Blueprint $table) {
+            $table->charset = 'utf8mb4';
+            $table->collation = 'utf8mb4_turkish_ci';
+            $table->engine = 'InnoDB';
             $table->id();
             $table->unsignedBigInteger('ogun_id');
             $table->unsignedBigInteger('tuketilen_besin_id');

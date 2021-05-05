@@ -14,6 +14,9 @@ class CreateOdemeler extends Migration
     public function up()
     {
         Schema::create('odemeler', function (Blueprint $table) {
+            $table->charset = 'utf8mb4';
+            $table->collation = 'utf8mb4_turkish_ci';
+            $table->engine = 'InnoDB';
 
             $table->id();
             $table->dateTime('odeme_tarih')->default(DB::raw('CURRENT_TIMESTAMP'));

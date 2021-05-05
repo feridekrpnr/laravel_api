@@ -14,9 +14,11 @@ class CreateDiyetisyenler extends Migration
     public function up()
     {
         Schema::create('diyetisyenler', function (Blueprint $table) {
-
+            $table->charset = 'utf8mb4';
+            $table->collation = 'utf8mb4_turkish_ci';
+            $table->engine = 'InnoDB';
             $table->id();
-            $table->unsignedBigInteger('kullanici_id')->unsigned();
+            $table->unsignedBigInteger('kullanici_id');
             $table->text('hakkimda',350)->nullable();
             $table->double('puan',30)->nullable();
             $table->foreign('kullanici_id')->references('id')->on('kullanicilar');

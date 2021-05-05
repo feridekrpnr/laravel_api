@@ -14,7 +14,9 @@ class CreateBesinKategori extends Migration
     public function up()
     {
         Schema::create('besin_kategori', function (Blueprint $table) {
-
+            $table->charset = 'utf8mb4';
+            $table->collation = 'utf8mb4_turkish_ci';
+            $table->engine = 'InnoDB';
             $table->id();
             $table->string('kategori_adi',70);
         });

@@ -14,6 +14,9 @@ class CreateOneriOgunTable extends Migration
     public function up()
     {
         Schema::create('oneri_ogun', function (Blueprint $table) {
+            $table->charset = 'utf8mb4';
+            $table->collation = 'utf8mb4_turkish_ci';
+            $table->engine = 'InnoDB';
             $table->id();
             $table->unsignedBigInteger('oneri_id');
             $table->unsignedBigInteger('ogun_id');

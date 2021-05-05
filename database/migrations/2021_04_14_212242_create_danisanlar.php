@@ -14,6 +14,9 @@ class CreateDanisanlar extends Migration
     public function up()
     {
         Schema::create('danisanlar', function (Blueprint $table) {
+            $table->charset = 'utf8mb4';
+            $table->collation = 'utf8mb4_turkish_ci';
+            $table->engine = 'InnoDB';
             $table->id();
             $table->double('danisan_boy')->nullable();
             $table->double('danisan_kilo')->nullable();

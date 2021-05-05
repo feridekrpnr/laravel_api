@@ -14,7 +14,9 @@ class CreateRoller extends Migration
     public function up()
     {
         Schema::create('roller', function (Blueprint $table) {
-
+            $table->charset = 'utf8mb4';
+            $table->collation = 'utf8mb4_turkish_ci';
+            $table->engine = 'InnoDB';
             $table->id();
             $table->string('ad',15);
 

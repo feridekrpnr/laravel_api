@@ -14,7 +14,9 @@ class CreateUcretlerTable extends Migration
     public function up()
     {
         Schema::create('ucretler', function (Blueprint $table) {
-            
+            $table->charset = 'utf8mb4';
+            $table->collation = 'utf8mb4_turkish_ci';
+            $table->engine = 'InnoDB';
             $table->id();
             $table->dateTime('baslangıc_tarihi')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->dateTime('bitis_tarihi')->default(DB::raw('CURRENT_TIMESTAMP'));
@@ -24,7 +26,7 @@ class CreateUcretlerTable extends Migration
             $table->unsignedBigInteger('diyetisyen_id');
 
             $table->foreign('diyetisyen_id')->references('id')->on('diyetisyenler');
-            
+
 
         });
     }
