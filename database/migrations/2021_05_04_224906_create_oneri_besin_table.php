@@ -20,8 +20,8 @@ class CreateOneriBesinTable extends Migration
             $table->id();
             $table->unsignedBigInteger('oneri_id');
             $table->unsignedBigInteger('besin_id');
-            $table->foreign('oneri_id')->references('id')->on('oneriler');
-            $table->foreign('besin_id')->references('id')->on('besinler');
+            $table->foreign('oneri_id')->references('id')->on('oneriler')->cascadeOnDelete();
+            $table->foreign('besin_id')->references('id')->on('besinler')->cascadeOnDelete();
             $table->timestamps();
         });
     }

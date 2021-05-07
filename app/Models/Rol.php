@@ -10,5 +10,6 @@ class Rol extends Model
     //protected $fillable = ['name'];
     public $timestamps = false;
     protected $table="roller";
+    protected $guarded=[];  //tabloların içini doldurmak için
     use HasFactory;
 }

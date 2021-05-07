@@ -21,7 +21,7 @@ class CreateDiyetisyenler extends Migration
             $table->unsignedBigInteger('kullanici_id');
             $table->text('hakkimda',350)->nullable();
             $table->double('puan',30)->nullable();
-            $table->foreign('kullanici_id')->references('id')->on('kullanicilar');
+            $table->foreign('kullanici_id')->references('id')->on('kullanicilar')->cascadeOnDelete()->cascadeOnUpdate();
 
 
 

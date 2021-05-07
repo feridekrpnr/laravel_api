@@ -20,8 +20,8 @@ class CreateTuketilenBesinlerKaloriHesaplamaTable extends Migration
             $table->id();
             $table->unsignedBigInteger('tuketilen_besin_id');
             $table->unsignedBigInteger('kalori_hesaplama_id');
-            $table->foreign('tuketilen_besin_id')->references('id')->on('tuketilen_besinler');
-            $table->foreign('kalori_hesaplama_id')->references('id')->on('kalori_hesaplama');
+            $table->foreign('tuketilen_besin_id')->references('id')->on('tuketilen_besinler')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreign('kalori_hesaplama_id')->references('id')->on('kalori_hesaplama')->cascadeOnDelete()->cascadeOnUpdate();
 
             $table->timestamps();
         });

@@ -20,8 +20,8 @@ class CreateBesinlerTuketilenBesinlerTable extends Migration
             $table->id();
             $table->unsignedBigInteger('tuketilen_besin_id');
             $table->unsignedBigInteger('besin_id');
-            $table->foreign('tuketilen_besin_id')->references('id')->on('tuketilen_besinler');
-            $table->foreign('besin_id')->references('id')->on('besinler');
+            $table->foreign('tuketilen_besin_id')->references('id')->on('tuketilen_besinler')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreign('besin_id')->references('id')->on('besinler')->cascadeOnDelete()->cascadeOnUpdate();
 
             $table->timestamps();
         });

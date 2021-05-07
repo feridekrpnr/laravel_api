@@ -8,5 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Randevu extends Model
 {
     use HasFactory;
+    protected $guarded=[];  //tabloların içini doldurmak için
     protected $table="randevular";
 }

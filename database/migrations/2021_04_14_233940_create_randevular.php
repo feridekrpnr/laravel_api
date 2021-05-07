@@ -24,8 +24,8 @@ class CreateRandevular extends Migration
             $table->unsignedBigInteger('danisan_id');
             $table->unsignedBigInteger('diyetisyen_id');
 
-            $table->foreign('danisan_id')->references('id')->on('danisanlar');
-            $table->foreign('diyetisyen_id')->references('id')->on('diyetisyenler');
+            $table->foreign('danisan_id')->references('id')->on('danisanlar')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreign('diyetisyen_id')->references('id')->on('diyetisyenler')->cascadeOnDelete()->cascadeOnUpdate();
 
 
         });

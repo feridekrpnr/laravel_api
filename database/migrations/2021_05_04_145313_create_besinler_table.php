@@ -22,7 +22,7 @@ class CreateBesinlerTable extends Migration
             $table->integer('besin_kalori');
             $table->string('besin_birimi',30);
             $table->unsignedBigInteger('besin_kategori_id');
-            $table->foreign('besin_kategori_id')->references('id')->on('besin_kategori');
+            $table->foreign('besin_kategori_id')->references('id')->on('besin_kategori')->cascadeOnDelete()->cascadeOnUpdate();
 
         });
     }

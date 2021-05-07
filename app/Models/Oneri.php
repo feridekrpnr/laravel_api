@@ -8,5 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Oneri extends Model
 {
     use HasFactory;
-    protected $table="öneriler";
+    protected $guarded=[];  //tabloların içini doldurmak için
+    protected $table="oneriler";
 }

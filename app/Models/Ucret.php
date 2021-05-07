@@ -8,5 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Ucret extends Model
 {
     use HasFactory;
-    protected $table="ücretler";
+    protected $guarded=[];  //tabloların içini doldurmak için
+    protected $table="ucretler";
 }

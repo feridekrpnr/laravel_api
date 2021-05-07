@@ -26,8 +26,8 @@ class CreateOdemeler extends Migration
             $table->unsignedBigInteger('diyetisyen_id');
             $table->unsignedBigInteger('danisan_id');
             $table->unsignedBigInteger('ucret_id');
-            $table->foreign('ucret_id')->references('id')->on('ucretler');
-            $table->foreign('danisan_id')->references('id')->on('danisanlar');
+            $table->foreign('ucret_id')->references('id')->on('ucretler')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreign('danisan_id')->references('id')->on('danisanlar')->cascadeOnDelete()->cascadeOnUpdate();
             /*
 
             $table->foreign('odemeturu_id')->references('id')->on('odemeturleri');

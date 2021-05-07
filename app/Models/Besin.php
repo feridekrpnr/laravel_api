@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Besin extends Model
 {
-    use HasFactory;
+    use HasFactory; //veri üretmeyi sağlar
+    protected $guarded=[];  //tabloların içini doldurmak için
     protected $table="besinler";
 }

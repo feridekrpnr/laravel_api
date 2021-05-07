@@ -20,8 +20,8 @@ class CreateOneriOgunTable extends Migration
             $table->id();
             $table->unsignedBigInteger('oneri_id');
             $table->unsignedBigInteger('ogun_id');
-            $table->foreign('oneri_id')->references('id')->on('oneriler');
-            $table->foreign('ogun_id')->references('id')->on('ogunler');
+            $table->foreign('oneri_id')->references('id')->on('oneriler')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreign('ogun_id')->references('id')->on('ogunler')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
 
         });

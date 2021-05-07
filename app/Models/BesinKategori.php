@@ -8,5 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class BesinKategori extends Model
 {
     use HasFactory;
-    protected $table="besinkategorileri";
+    protected $guarded=[];  //tabloların içini doldurmak için
+    protected $table="besinkategori";
 }

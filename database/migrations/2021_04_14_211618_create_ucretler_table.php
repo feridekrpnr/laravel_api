@@ -25,7 +25,7 @@ class CreateUcretlerTable extends Migration
 
             $table->unsignedBigInteger('diyetisyen_id');
 
-            $table->foreign('diyetisyen_id')->references('id')->on('diyetisyenler');
+            $table->foreign('diyetisyen_id')->references('id')->on('diyetisyenler')->cascadeOnDelete()->cascadeOnUpdate();
 
 
         });

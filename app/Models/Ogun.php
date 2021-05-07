@@ -8,5 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Ogun extends Model
 {
     use HasFactory;
-    protected $table="öğünler";
+    protected $guarded=[];  //tabloların içini doldurmak için
+    protected $table="ogunler";
 }

@@ -20,8 +20,8 @@ class CreateOneriKaloriHesaplamaTable extends Migration
             $table->id();
             $table->unsignedBigInteger('oneri_id');
             $table->unsignedBigInteger('kalori_hesaplama_id');
-            $table->foreign('oneri_id')->references('id')->on('oneriler');
-            $table->foreign('kalori_hesaplama_id')->references('id')->on('kalori_hesaplama');
+            $table->foreign('oneri_id')->references('id')->on('oneriler')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreign('kalori_hesaplama_id')->references('id')->on('kalori_hesaplama')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

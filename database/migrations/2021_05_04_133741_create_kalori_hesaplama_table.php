@@ -20,9 +20,9 @@ class CreateKaloriHesaplamaTable extends Migration
             $table->id();
             $table->string('tuketilen_kalori',70);
             $table->unsignedBigInteger('oneri_id');
-            $table->foreign('oneri_id')->references('id')->on('oneriler');
+            $table->foreign('oneri_id')->references('id')->on('oneriler')->cascadeOnDelete()->cascadeOnUpdate();
             $table->unsignedBigInteger('tuketilen_besin_id');
-            //$table->foreign('tuketilen_besin_id')->references('id')->on('tuketilen_besinler');
+            $table->foreign('tuketilen_besin_id')->references('id')->on('tuketilen_besinler')->cascadeOnDelete()->cascadeOnUpdate();
 
 
 
