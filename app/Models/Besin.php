@@ -10,4 +10,5 @@ class Besin extends Model
     use HasFactory; //veri üretmeyi sağlar
     protected $guarded=[];  //tabloların içini doldurmak için
     protected $table="besinler";
+    public $timestamps=false;
 }

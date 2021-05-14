@@ -19,20 +19,21 @@ class CreateOdemeler extends Migration
             $table->engine = 'InnoDB';
 
             $table->id();
-            $table->dateTime('odeme_tarih')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->dateTime('odeme_tarih');
+            //->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->text('oneri_aciklama',350);
 
-            $table->unsignedBigInteger('odemeturu_id');
+            //$table->unsignedBigInteger('odemeturu_id');
             $table->unsignedBigInteger('diyetisyen_id');
             $table->unsignedBigInteger('danisan_id');
             $table->unsignedBigInteger('ucret_id');
-            $table->foreign('ucret_id')->references('id')->on('ucretler')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreign('danisan_id')->references('id')->on('danisanlar')->cascadeOnDelete()->cascadeOnUpdate();
-            /*
+            //$table->foreign('ucret_id')->references('id')->on('ucretler')->cascadeOnDelete()->cascadeOnUpdate();
+          // $table->foreign('danisan_id')->references('id')->on('danisanlar')->cascadeOnDelete()->cascadeOnUpdate();
 
-            $table->foreign('odemeturu_id')->references('id')->on('odemeturleri');
-            $table->foreign('diyetisyen_id')->references('id')->on('diyetisyenler');
-            */
+            //$table->foreign('odemeturu_id')->references('id')->on('odemeturleri')->cascadeOnDelete()->cascadeOnUpdate();
+           // $table->foreign('diyetisyen_id')->references('id')->on('diyetisyenler')->cascadeOnDelete()->cascadeOnUpdate();
+
+
 
         });
     }

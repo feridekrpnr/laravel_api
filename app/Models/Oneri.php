@@ -10,4 +10,5 @@ class Oneri extends Model
     use HasFactory;
     protected $guarded=[];  //tabloların içini doldurmak için
     protected $table="oneriler";
+    public $timestamps=false;
 }

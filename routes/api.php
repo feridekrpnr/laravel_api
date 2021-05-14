@@ -60,18 +60,5 @@ Route::apiResources([
   Route::put('/rol/{rol}', [\App\Http\Controllers\Api\RolController::class, 'update']);
 
 
-     
-     
-   
-   
 
-     /*
-
-
-        BU ŞEYMA ERBAŞ'IN YORUM SATIRIDIR SAKIN SİLMEYİN
-
-        BU YORUM SATIRINI GÖRÜYORSANIZ İŞLME BAŞARILI DEMEKTİR!
-
-
-     */
 

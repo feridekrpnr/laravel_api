@@ -22,7 +22,10 @@ class KullaniciFactory extends Factory
     public function definition()
     {
         return [
-            //
+
+            'kayit_tarihi'=>$this->faker->dateTime(),
+            'aktif'=>$this->faker->numberBetween(1,2),
+            'rol_id'=>rand(1,10)
         ];
     }
 }

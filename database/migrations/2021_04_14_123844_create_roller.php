@@ -18,7 +18,7 @@ class CreateRoller extends Migration
             $table->collation = 'utf8mb4_turkish_ci';
             $table->engine = 'InnoDB';
             $table->id();
-            $table->string('ad',15);
+            $table->string('rol_adi');
 
 
         });

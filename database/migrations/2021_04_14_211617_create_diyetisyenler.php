@@ -18,9 +18,17 @@ class CreateDiyetisyenler extends Migration
             $table->collation = 'utf8mb4_turkish_ci';
             $table->engine = 'InnoDB';
             $table->id();
-            $table->unsignedBigInteger('kullanici_id');
+            $table->string('adi', 30);
+            $table->string('soyad', 30);
+            $table->string('mail', 150)->unique();
+            $table->string('parola', 12);
+            $table->string('tc',11)->unique();
+            $table->string('telefon', 11);
+            $table->smallInteger('cinsiyet');
+            $table->integer('yas');
             $table->text('hakkimda',350)->nullable();
             $table->double('puan',30)->nullable();
+            $table->unsignedBigInteger('kullanici_id');
             $table->foreign('kullanici_id')->references('id')->on('kullanicilar')->cascadeOnDelete()->cascadeOnUpdate();
 
 

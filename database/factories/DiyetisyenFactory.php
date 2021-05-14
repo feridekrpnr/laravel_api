@@ -22,7 +22,17 @@ class DiyetisyenFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'adi' => $this->faker->name,
+            'soyad'=>$this->faker->name,
+            'mail' => $this->faker->unique()->safeEmail,
+            'parola'=>'$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+            'tc'=>$this->faker->unique(),
+            'telefon'=>$this->faker->phoneNumber,
+            'cinsiyet'=>$this->faker->numberBetween(1,2),
+            'yas'=>$this->faker->numberBetween(1,90),
+            'hakkımda' => $this->faker->text,
+            'puan'=>$this->faker->numberBetween(1,100),
+            'kullanici_id'=>rand(1,10)
         ];
     }
 }

@@ -16,12 +16,12 @@ class DiyetisyenController extends Controller
      */
     public function index()
     {
-
-        $data = Diyetisyen::all();
+        return response()->json(Diyetisyen::all());
+        // $data = Diyetisyen::all();
         // dd($value);
         // return Diyetisyen::all();
         //  return view('deneme',['data'=>$data]);
-    return response()->json($data);
+        // return response()->json($data);
 
     }
 

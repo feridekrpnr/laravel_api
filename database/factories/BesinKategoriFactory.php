@@ -22,7 +22,7 @@ class BesinKategoriFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'kategori_adi' => $this->faker->name,
         ];
     }
 }

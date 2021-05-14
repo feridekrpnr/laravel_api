@@ -45,4 +45,5 @@ use App\Http\Controllers\Api\BesinController;
 
 
 // });
+Route::get('/oneri',[\App\Http\Controllers\DenemeController::class,'oneri']);
 

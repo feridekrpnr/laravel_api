@@ -10,4 +10,5 @@ class Kullanici extends Model
     use HasFactory;
     protected $guarded=[];  //tabloların içini doldurmak için
     protected $table="kullanicilar";
+    public $timestamps=false;
 }

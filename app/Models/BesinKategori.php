@@ -9,5 +9,6 @@ class BesinKategori extends Model
 {
     use HasFactory;
     protected $guarded=[];  //tabloların içini doldurmak için
-    protected $table="besinkategori";
+    protected $table="besin_kategori";
+    public $timestamps=false;
 }

@@ -18,14 +18,7 @@ class CreateKullanicilar extends Migration
             $table->collation = 'utf8mb4_turkish_ci';
             $table->engine = 'InnoDB';
             $table->id();
-            $table->string('adi', 30);
-            $table->string('soyad', 30);
-            $table->string('mail', 150)->unique();
-            $table->string('parola', 12);
-            $table->string('tc',11)->unique();
-            $table->string('telefon', 11);
-            $table->smallInteger('cinsiyet');
-            $table->integer('yas');
+
             $table->dateTime('kayit_tarihi');
             $table->smallInteger('aktif');
             $table->unsignedBigInteger('rol_id');

@@ -22,7 +22,10 @@ class DanısanFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'danısan_boy' => $this->faker->randomFloat(),
+            'danısan_kilo'=>$this->faker->numberBetween(1,150),
+            'kullanici_id'=>rand(1,10)
+
         ];
     }
 }

@@ -10,4 +10,5 @@ class Ucret extends Model
     use HasFactory;
     protected $guarded=[];  //tabloların içini doldurmak için
     protected $table="ucretler";
+    public $timestamps=false;
 }

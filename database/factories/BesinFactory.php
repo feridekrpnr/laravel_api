@@ -22,7 +22,12 @@ class BesinFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'besin_adi' => $this->faker->name,
+            'besin_kalori'=>$this->faker->numberBetween(1,10000),
+            'besin_birimi'=>$this->faker->numberBetween(1,10000),
+            'besin_kategori_id'=>rand(1,10)
+
+
         ];
     }
 }
