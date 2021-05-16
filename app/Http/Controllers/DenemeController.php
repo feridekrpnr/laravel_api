@@ -8,6 +8,7 @@ class DenemeController extends Controller
 {
     public function oneri()
     {
-      return Ogun::find(1)->onerilerim;
+        dd(Ogun::find(1)->onerilerim);
+
     }
 }

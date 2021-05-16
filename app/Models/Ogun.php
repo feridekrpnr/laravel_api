@@ -13,7 +13,6 @@ class Ogun extends Model
     public function onerilerim()
     {
         return $this->belongsToMany(Oneri::class,'oneri_ogun','ogun_id','oneri_id');
-        Ogun::find(1)->onerilerim;
 
     }
 }

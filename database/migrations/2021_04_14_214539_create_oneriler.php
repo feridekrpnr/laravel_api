@@ -22,12 +22,12 @@ class CreateOneriler extends Migration
             $table->text('oneri_aciklama');
             $table->integer('oneri_kalori');
 
-            //$table->unsignedBigInteger('besin_id');
+            $table->unsignedBigInteger('besin_id');
             $table->unsignedBigInteger('danisan_id');
             $table->unsignedBigInteger('diyetisyen_id');
             $table->foreign('diyetisyen_id')->references('id')->on('diyetisyenler')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreign('danisan_id')->references('id')->on('danisanlar')->cascadeOnDelete()->cascadeOnUpdate();
-           // $table->foreign('besin_id')->references('id')->on('besinler')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreign('besin_id')->references('id')->on('besinler')->cascadeOnDelete()->cascadeOnUpdate();
 
         });
     }
