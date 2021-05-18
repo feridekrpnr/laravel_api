@@ -15,6 +15,7 @@ class KullaniciController extends Controller
      */
     public function index()
     {
+        //return response(Rol::paginate(10), 200);
         return response()->json(Kullanici::all());
     }
 
@@ -25,8 +26,20 @@ class KullaniciController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
+
     {
-        //
+        $input = $request->all(); //gelen tüm dataya erişim sağlar
+        //veri tabanına kaydetme
+       $kullanici = new Kullanici;
+       $kullanici->kayit_tarihi = $request->kayit_tarihi;
+       $kullanici->aktif = $request->aktif;
+       $kullanici->rol_id = $request->rol_id;
+       $kullanici->save();
+
+            return response([
+                'data' => $kullanici,
+                'message'=> 'kullanıcı oluşturuldu'
+            ],201);
     }
 
     /**
@@ -37,9 +50,9 @@ class KullaniciController extends Controller
      */
     public function show($id)
     {
-        $dyt = Kullanici::find($id);
-        if($dyt)
-            return response()->json($dyt, 200);
+        $kullanici = Kullanici::find($id);
+        if($kullanici)
+            return response()->json($kullanici, 200);
         else
             return response(['message'=> 'Kullanıcı bulunamadi'],404);
     }
@@ -53,7 +66,16 @@ class KullaniciController extends Controller
      */
     public function update(Request $request, Kullanici $kullanici)
     {
-        //
+        $kullanici = Kullanici::find($id);
+        $kullanici->kayit_tarihi = $request->kayit_tarihi;
+        $kullanici->aktif = $request->aktif;
+        $kullanici->rol_id = $request->rol_id;
+        $kullanici->save();
+ 
+             return response([
+                 'data' => $kullanici,
+                 'message'=> 'kullanıcı güncellendi'
+             ],200);
     }
 
     /**
@@ -62,8 +84,13 @@ class KullaniciController extends Controller
      * @param  \App\Models\Kullanici  $kullanici
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Kullanici $kullanici)
+    public function destroy(Kullanici $kullanici,$id)
     {
-        //
+        $kullanici = Kullanici::find($id);
+        $kullanici->delete();
+
+        return response([
+            'message'=> 'Kullanici silindi'
+             ],201);
     }
 }

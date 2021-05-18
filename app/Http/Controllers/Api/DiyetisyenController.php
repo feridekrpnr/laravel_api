@@ -22,6 +22,7 @@ class DiyetisyenController extends Controller
         // return Diyetisyen::all();
         //  return view('deneme',['data'=>$data]);
         // return response()->json($data);
+        //   return response(Rol::paginate(10), 200);
 
     }
 
@@ -35,14 +36,23 @@ class DiyetisyenController extends Controller
     {
         $input = $request->all(); //gelen tüm dataya erişim sağlar
         //veri tabanına kaydetme
-       $rol = new Diyetisyen;
-       $rol->hakkimda = $request->hakkimda;
-       $rol->puan = $request->puan;
-       $rol->save();
+        $diyetisyen = new Diyetisyen;
+        $diyetisyen->adi = $request->adi;
+        $diyetisyen->soyad = $request->soyad;
+        $diyetisyen->mail = $request->mail;
+        $diyetisyen->parola = $request->parola;
+        $diyetisyen->tc = $request->tc;
+        $diyetisyen->telefon = $request->telefon;
+        $diyetisyen->cinsiyet = $request->cinsiyet;
+        $diyetisyen->yas = $request->yas;
+        $diyetisyen->hakkimda = $request->hakkimda;
+        $diyetisyen->puan = $request->puan;
+        $diyetisyen->kullanici_id = $request->kullanici_id;
+        $diyetisyen->save();
 
             return response([
-                'data' => $rol,
-                'message'=> 'Rol oluşturuldu'
+                'data' => $diyetisyen,
+                'message'=> 'diyetisyen oluşturuldu'
             ],201);
     }
 
@@ -54,9 +64,9 @@ class DiyetisyenController extends Controller
      */
     public function show($id)
     {
-        $dyt = Diyetisyen::find($id);
-        if($dyt)
-            return response()->json($dyt, 200);
+        $diyetisyen = Diyetisyen::find($id);
+        if($diyetisyen)
+            return response()->json($diyetisyen, 200);
         else
             return response(['message'=> 'Diyetisyen bulunamadi'],404);
     }
@@ -70,7 +80,24 @@ class DiyetisyenController extends Controller
      */
     public function update(Request $request, Diyetisyen $diyetisyen)
     {
-        //
+        $diyetisyen = Diyetisyen::find($id);
+        $diyetisyen->adi = $request->adi;
+        $diyetisyen->soyad = $request->soyad;
+        $diyetisyen->mail = $request->mail;
+        $diyetisyen->parola = $request->parola;
+        $diyetisyen->tc = $request->tc;
+        $diyetisyen->telefon = $request->telefon;
+        $diyetisyen->cinsiyet = $request->cinsiyet;
+        $diyetisyen->yas = $request->yas;
+        $diyetisyen->hakkimda = $request->hakkimda;
+        $diyetisyen->puan = $request->puan;
+        $diyetisyen->kullanici_id = $request->kullanici_id;
+        $diyetisyen->save();
+
+            return response([
+                'data' => $diyetisyen,
+                'message'=> 'diyetisyen güncellendi'
+            ],200);
     }
 
     /**
@@ -79,9 +106,15 @@ class DiyetisyenController extends Controller
      * @param \App\Models\Diyetisyen $diyetisyen
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Diyetisyen $diyetisyen)
+    public function destroy(Diyetisyen $diyetisyen,$id)
     {
-        //
+        $diyetisyen = Diyetisyen::find($id);
+        $diyetisyen->delete();
+
+        return response([
+            'message'=> 'Diyetisyen silindi'
+             ],201);
+        
     }
     public function  bul1() {
         return Diyetisyen::pluck('id'); //pluck metodu yalnızca bir kolonu almayı sağlar

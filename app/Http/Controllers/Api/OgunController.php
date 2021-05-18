@@ -15,7 +15,7 @@ class OgunController extends Controller
      */
     public function index()
     {
-        //
+        //   return response(Rol::paginate(10), 200);
         return response()->json(Ogun::all());
     }
 
@@ -27,7 +27,16 @@ class OgunController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all(); //gelen tüm dataya erişim sağlar
+        //veri tabanına kaydetme
+       $ogun = new Ogun;
+       $ogun->ogun_adı = $request->ogun_adı;
+       $ogun->save();
+
+            return response([
+                'data' => $ogun,
+                'message'=> 'ogun oluşturuldu'
+            ],201);
     }
 
     /**
@@ -38,9 +47,9 @@ class OgunController extends Controller
      */
     public function show($id)
     {
-        $dyt = Ogun::find($id);
-        if($dyt)
-            return response()->json($dyt, 200);
+        $ogun = Ogun::find($id);
+        if($ogun)
+            return response()->json($ogun, 200);
         else
             return response(['message'=> 'Oğün bulunamadi'],404);
     }
@@ -54,7 +63,15 @@ class OgunController extends Controller
      */
     public function update(Request $request, Ogun $ogun)
     {
-        //
+        $ogun = Ogun::find($id);
+        $ogun->ogun_adı = $request->ogun_adı;
+        $ogun->save();
+ 
+             return response([
+                 'data' => $ogun,
+                 'message'=> 'ogun güncellendi'
+             ],200);
+     }
     }
 
     /**
@@ -63,8 +80,13 @@ class OgunController extends Controller
      * @param  \App\Models\Ogun  $ogun
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Ogun $ogun)
+    public function destroy(Ogun $ogun,$id)
     {
-        //
+        $ogun = Ogun::find($id);
+        $ogun->delete();
+
+        return response([
+            'message'=> 'ogun silindi'
+             ],201);
     }
 }

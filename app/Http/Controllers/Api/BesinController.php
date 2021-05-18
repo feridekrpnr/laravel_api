@@ -16,8 +16,9 @@ class BesinController extends Controller
 
     public function index()
     {
-        //
+        //   return response(Rol::paginate(10), 200);
         return response()->json(Besin::all());
+
     }
 
     /**
@@ -27,9 +28,23 @@ class BesinController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
+
     {
-        //
+        $input = $request->all(); //gelen tüm dataya erişim sağlar
+        //veri tabanına kaydetme
+       $besin = new Besin;
+       $besin->besin_adi = $request->besin_adi;
+       $besin->besin_kalori = $request->besin_kalori;
+       $besin->besin_birimi = $request->besin_birimi;
+       $besin->besin_kategori_id = $request->besin_kategori_id;
+       $besin->save();
+
+            return response([
+                'data' => $besin,
+                'message'=> 'besin oluşturuldu'
+            ],201);
     }
+
 
     /**
      * Display the specified resource.
@@ -39,9 +54,9 @@ class BesinController extends Controller
      */
     public function show($id)
     {
-        $dyt = Besin::find($id);
-        if($dyt)
-            return response()->json($dyt, 200);
+        $besin = Besin::find($id);
+        if($besin)
+            return response()->json($besin, 200);
         else
             return response(['message'=> 'Besin bulunamadi'],404);
     }
@@ -55,7 +70,20 @@ class BesinController extends Controller
      */
     public function update(Request $request, Besin $besin)
     {
-        //
+        //$input = $request->all();
+        //$besin->update($input);
+        $besin = Besin::find($id);
+        $besin->besin_adi = $request->besin_adi;
+        $besin->besin_kalori = $request->besin_kalori;
+        $besin->besin_birimi = $request->besin_birimi;
+        $besin->besin_kategori_id = $request->besin_kategori_id;
+        $besin->save();
+ 
+             return response([
+                 'data' => $besin,
+                 'message'=> 'besin güncellendi'
+             ],200);
+    }
     }
 
     /**
@@ -64,8 +92,14 @@ class BesinController extends Controller
      * @param  \App\Models\Besin  $besin
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Besin $besin)
+    public function destroy(Besin $besin,$id)
     {
-        //
+        $besin = Besin::find($id);
+        $besin->delete();
+
+        return response([
+            'message'=> 'besin silindi'
+             ],201);
+        
     }
 }

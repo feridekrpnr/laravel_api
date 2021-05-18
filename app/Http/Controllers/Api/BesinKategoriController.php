@@ -15,7 +15,7 @@ class BesinKategoriController extends Controller
      */
     public function index()
     {
-        //
+        //   return response(Rol::paginate(10), 200);
         return response()->json(BesinKategori::all());
     }
 
@@ -26,8 +26,18 @@ class BesinKategoriController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
+
     {
-        //
+        $input = $request->all(); //gelen tüm dataya erişim sağlar
+        //veri tabanına kaydetme
+       $besinKategori = new BesinKategori;
+       $besinKategori->kategori_adi = $request->kategori_adi;
+       $besinKategori->save();
+
+            return response([
+                'data' => $besinKategori,
+                'message'=> 'besin Kategori oluşturuldu'
+            ],201);
     }
 
     /**
@@ -38,9 +48,9 @@ class BesinKategoriController extends Controller
      */
     public function show($id)
     {
-        $dyt = BesinKategori::find($id);
-        if($dyt)
-            return response()->json($dyt, 200);
+        $besinKategori = BesinKategori::find($id);
+        if($besinKategori)
+            return response()->json($besinKategori, 200);
         else
             return response(['message'=> 'Besin Kategorisi bulunamadi'],404);
     }
@@ -54,7 +64,14 @@ class BesinKategoriController extends Controller
      */
     public function update(Request $request, BesinKategori $besinKategori)
     {
-        //
+        $dyt = BesinKategori::find($id);
+        $besinKategori->kategori_adi = $request->kategori_adi;
+        $besinKategori->save();
+ 
+             return response([
+                 'data' => $besinKategori,
+                 'message'=> 'besin Kategori güncellendi'
+             ],200);
     }
 
     /**
@@ -63,8 +80,13 @@ class BesinKategoriController extends Controller
      * @param  \App\Models\BesinKategori  $besinKategori
      * @return \Illuminate\Http\Response
      */
-    public function destroy(BesinKategori $besinKategori)
+    public function destroy(BesinKategori $besinKategori,$id)
     {
-        //
+        $besinKategori = BesinKategori::find($id);
+        $besinKategori->delete();
+
+        return response([
+            'message'=> 'BesinKategori silindi'
+             ],201);
     }
 }

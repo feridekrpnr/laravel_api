@@ -10,14 +10,30 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/diyetisyenler/bul1', [\App\Http\Controllers\Api\DiyetisyenController::class, 'bul1']); //diyetisyenlerin altında ozel bir metot
 
+Route::get('roller',function(){
+     return factory(Rol::class, 10)->make();
+});
+Route::get('kullanicilar',function(){
+     return factory(Kullanici::class, 10)->make();
+});
 
 
 //
 
 Route::apiResources([
-     'diyetisyenler' => 'Api\DiyetisyenController'
+     'besinler' => \App\Http\Controllers\Api\BesinController::class,
+     'besinKategorileri' => \App\Http\Controllers\Api\BesinKategoriController::class,
+     'danisanlar' => \App\Http\Controllers\Api\DanisanController::class,
+     'diyetisyenler' => \App\Http\Controllers\Api\DiyetisyenController::class,
+     'odemeler' => \App\Http\Controllers\Api\OdemeController::class,
+     'ogunler' => \App\Http\Controllers\Api\OgunController::class,
+     'oneriler' => \App\Http\Controllers\Api\OneriController::class,
+     'randevular' => \App\Http\Controllers\Api\RandevuController::class,
+     'ucretler' => \App\Http\Controllers\Api\UcretController::class,
+     'roller' => \App\Http\Controllers\Api\RolController::class,
+     'kullanicilar' => \App\Http\Controllers\Api\KullaniciController::class,
+     'kaloriHesaplama' => \App\Http\Controllers\Api\KaloriHesaplamaController::class,
 ]);
-
 
      Route::get('/diyetisyenler', [\App\Http\Controllers\Api\DiyetisyenController::class, 'index']);
      Route::get('/danisanlar', [\App\Http\Controllers\Api\DanisanController::class, 'index']);
@@ -30,6 +46,7 @@ Route::apiResources([
      Route::get('/randevular', [\App\Http\Controllers\Api\RandevuController::class, 'index']);
      Route::get('/ucretler', [\App\Http\Controllers\Api\UcretController::class, 'index']);
      Route::get('/roller', [\App\Http\Controllers\Api\RolController::class, 'index']);
+     Route::get('/kaloriHesaplama', [\App\Http\Controllers\Api\KaloriHesaplamaController::class, 'index']);
 
      Route::get('/diyetisyen/{id}', [\App\Http\Controllers\Api\DiyetisyenController::class, 'show']);
      Route::get('/danisan/{id}', [\App\Http\Controllers\Api\DanisanController::class, 'show']);
@@ -42,22 +59,56 @@ Route::apiResources([
      Route::get('/ucret/{id}', [\App\Http\Controllers\Api\UcretController::class, 'show']);
      Route::get('/besin/{id}', [\App\Http\Controllers\Api\BesinController::class, 'show']);
      Route::get('/rol/{id}', [\App\Http\Controllers\Api\RolController::class, 'show']);
+     Route::get('/kaloriHesaplama/{id}', [\App\Http\Controllers\Api\KaloriHesaplamaController::class, 'show']);
+
 
       //POST METHODS//////////////////////////////////////////////////////////////////////////////////////////////////
 
-    Route::post('/roller', [\App\Http\Controllers\Api\RolController::class, 'store']);
-    Route::post('/diyetisyenler', [\App\Http\Controllers\Api\DiyetisyenController::class, 'store']);
+    Route::post('/rol/{id}', [\App\Http\Controllers\Api\RolController::class, 'store']);
+    Route::post('/diyetisyen', [\App\Http\Controllers\Api\DiyetisyenController::class, 'store']);
+    Route::post('/kullanici/{id}', [\App\Http\Controllers\Api\KullaniciController::class, 'store']);
+    Route::post('/besin/{id}', [\App\Http\Controllers\Api\BesinController::class, 'store']);
+    Route::post('/danisan/{id}', [\App\Http\Controllers\Api\DanisanController::class, 'store']);
+    Route::post('/odeme/{id}', [\App\Http\Controllers\Api\OdemeController::class, 'store']);
+    Route::post('/ogun/{id}', [\App\Http\Controllers\Api\OgunController::class, 'store']);
+    Route::post('/oneri/{id}', [\App\Http\Controllers\Api\OneriController::class, 'store']);
+    Route::post('/randevu/{id}', [\App\Http\Controllers\Api\RandevuController::class, 'store']);
+    Route::post('/ucret/{id}', [\App\Http\Controllers\Api\UcretController::class, 'store']);
+    Route::post('/besinKategori/{id}', [\App\Http\Controllers\Api\BesinKategoriController::class, 'store']);
+    Route::post('/kaloriHesaplama/{id}', [\App\Http\Controllers\Api\KaloriHesaplamaController::class, 'store']);
 
     //-------------------------------------------------------------------------------------------------------------//
-
-
-
-
-
 
   //PUT METHODS//////////////////////////////////////////////////////////////////////////////////////////////////
 
   Route::put('/rol/{rol}', [\App\Http\Controllers\Api\RolController::class, 'update']);
+  Route::put('/diyetisyen/{diyetisyen}', [\App\Http\Controllers\Api\DiyetisyenController::class, 'update']);
+  Route::put('/kullanici/{kullanici}', [\App\Http\Controllers\Api\KullaniciController::class, 'update']);
+  Route::put('/besin/{besin}', [\App\Http\Controllers\Api\BesinController::class, 'update']);
+  Route::put('/danisan/{danisan}', [\App\Http\Controllers\Api\DanisanController::class, 'update']);
+  Route::put('/odeme/{odeme}', [\App\Http\Controllers\Api\OdemeController::class, 'update']);
+  Route::put('/ogun/{ogun}', [\App\Http\Controllers\Api\OgunController::class, 'update']);
+  Route::put('/oneri/{oneri}', [\App\Http\Controllers\Api\OneriController::class, 'update']);
+  Route::put('/randevu/{randevu}', [\App\Http\Controllers\Api\RandevuController::class, 'update']);
+  Route::put('/ucret/{ucret}', [\App\Http\Controllers\Api\UcretController::class, 'update']);
+  Route::put('/besinKategori/{besinKategori}', [\App\Http\Controllers\Api\BesinKategoriController::class, 'update']);
+  Route::put('/kaloriHesaplama/{kaloriHesaplama}', [\App\Http\Controllers\Api\KaloriHesaplamaController::class, 'update']);
+
+ //DELETE METHODS//////////////////////////////////////////////////////////////////////////////////////////////////
+
+ Route::delete('/rol/{rol}', [\App\Http\Controllers\Api\RolController::class, 'destroy']);
+ Route::delete('/diyetisyen/{diyetisyen}', [\App\Http\Controllers\Api\DiyetisyenController::class, 'destroy']);
+ Route::delete('/kullanici/{kullanici}', [\App\Http\Controllers\Api\KullaniciController::class, 'destroy']);
+ Route::delete('/besin/{besin}', [\App\Http\Controllers\Api\BesinController::class, 'destroy']);
+ Route::delete('/danisan/{danisan}', [\App\Http\Controllers\Api\DanisanController::class, 'destroy']);
+ Route::delete('/odeme/{odeme}', [\App\Http\Controllers\Api\OdemeController::class, 'destroy']);
+ Route::delete('/ogun/{ogun}', [\App\Http\Controllers\Api\OgunController::class, 'destroy']);
+ Route::delete('/oneri/{oneri}', [\App\Http\Controllers\Api\OneriController::class, 'destroy']);
+ Route::delete('/randevu/{randevu}', [\App\Http\Controllers\Api\RandevuController::class, 'destroy']);
+ Route::delete('/ucret/{ucret}', [\App\Http\Controllers\Api\UcretController::class, 'destroy']);
+ Route::delete('/besinKategori/{besinKategori}', [\App\Http\Controllers\Api\BesinKategoriController::class, 'destroy']);
+ Route::delete('/kaloriHesaplama/{kaloriHesaplama}', [\App\Http\Controllers\Api\KaloriHesaplamaController::class, 'destroy']);
+
 
 
 

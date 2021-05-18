@@ -23,8 +23,7 @@ class CreateTuketilenBesinlerTable extends Migration
             $table->unsignedBigInteger('danisan_id');
             $table->foreign('danisan_id')->references('id')->on('danisanlar')->cascadeOnDelete();
 
-
-
+        
 
         });
     }

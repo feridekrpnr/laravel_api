@@ -11,4 +11,19 @@ class Oneri extends Model
     protected $guarded=[];  //tabloların içini doldurmak için
     protected $table="oneriler";
     public $timestamps=false;
+
+    public function onerilerim()
+    {
+        return $this->belongsToMany(Besin::class,'oneri_besin','oneri_id','besin_id');
+    }
+
+    public function onerilerim()
+    {
+        return $this->belongsToMany(Ogun::class,'oneri_ogun','oneri_id','ogun_id');
+    }
+
+    public function onerilerim()
+    {
+        return $this->belongsToMany(KaloriHesaplama::class,'oneri_kalori_hesaplama','oneri_id','kalori_hesaplama_id');
+    }
 }

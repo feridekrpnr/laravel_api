@@ -21,8 +21,11 @@ class RolFactory extends Factory
      */
     public function definition()
     {
+        $factory->define(Rol::class, function(Faker $faker){
+            $rol_adi = $faker->sentence(1);
+        
         return [
-            'rol_adi' => $this->faker->name,
+            'rol_adi' => $rol_adi
         ];
-    }
-}
+    
+});

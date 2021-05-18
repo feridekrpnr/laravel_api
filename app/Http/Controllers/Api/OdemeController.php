@@ -15,7 +15,7 @@ class OdemeController extends Controller
      */
     public function index()
     {
-        //
+        //   return response(Rol::paginate(10), 200);
         return response()->json(Odeme::all());
     }
 
@@ -27,7 +27,21 @@ class OdemeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $input = $request->all(); //gelen tüm dataya erişim sağlar
+        //veri tabanına kaydetme
+       $odeme = new Odeme;
+       $odeme->odeme_tarih	 = $request->odeme_tarih	;
+       $odeme->oneri_aciklama = $request->oneri_aciklama;
+       $odeme->diyetisyen_id = $request->diyetisyen_id;
+       $odeme->danisan_id = $request->danisan_id;
+       $odeme->ucret_id = $request->ucret_id;
+       $odeme->save();
+
+            return response([
+                'data' => $odeme,
+                'message'=> 'odeme oluşturuldu'
+            ],201);
     }
 
     /**
@@ -38,9 +52,9 @@ class OdemeController extends Controller
      */
     public function show($id)
     {
-        $dyt = Odeme::find($id);
-        if($dyt)
-            return response()->json($dyt, 200);
+        $odeme = Odeme::find($id);
+        if($odeme)
+            return response()->json($odeme, 200);
         else
             return response(['message'=> 'Ödeme bulunamadi'],404);
     }
@@ -54,7 +68,18 @@ class OdemeController extends Controller
      */
     public function update(Request $request, Odeme $odeme)
     {
-        //
+        $odeme = Odeme::find($id);
+        $odeme->odeme_tarih	 = $request->odeme_tarih	;
+        $odeme->oneri_aciklama = $request->oneri_aciklama;
+        $odeme->diyetisyen_id = $request->diyetisyen_id;
+        $odeme->danisan_id = $request->danisan_id;
+        $odeme->ucret_id = $request->ucret_id;
+        $odeme->save();
+
+            return response([
+                'data' => $odeme,
+                'message'=> 'odeme güncellendi'
+            ],200);
     }
 
     /**
@@ -63,8 +88,13 @@ class OdemeController extends Controller
      * @param  \App\Models\Odeme  $odeme
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Odeme $odeme)
+    public function destroy(Odeme $odeme,$id)
     {
-        //
+        $odeme = Odeme::find($id);
+        $odeme->delete();
+
+        return response([
+            'message'=> 'Odeme silindi'
+             ],201);
     }
 }

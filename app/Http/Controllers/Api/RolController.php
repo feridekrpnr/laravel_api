@@ -13,9 +13,25 @@ class RolController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         return response()->json(Rol::all());
+        //return response(Rol::paginate(10), 200); //sayfalandırma
+       
+        /* $offset  = $request->offset ? $request->query('offset') : 0; //kaçıncı kayıttan başlayacağını
+            $limit  = $request->limit ? $request->quey('limit') : 10; //kaç tane kayıt alınacağını       
+            
+            $qb = Rol::query();
+            if($request->has('q'))
+                $qb->where('name','like','%' . $request->query('q') . '%');
+
+            if($request->has('sortBy'))
+                $qb->orderby($request->query('sortBy'), $request->query('sort', 'DESC'));
+
+            $data = $qb->offset($offset)->limit($limit)->get();
+
+            return response($data,200);
+        */
     }
 
     /**
@@ -29,7 +45,7 @@ class RolController extends Controller
         $input = $request->all(); //gelen tüm dataya erişim sağlar
         //veri tabanına kaydetme
        $rol = new Rol;
-       $rol->ad = $request->ad;
+       $rol->rol_adi = $request->ad;
        $rol->save();
 
             return response([
@@ -46,9 +62,9 @@ class RolController extends Controller
      */
     public function show($id)
     {
-        $dyt = Besin::find($id);
-        if($dyt)
-            return response()->json($dyt, 200);
+        $rol = Rol::find($id);
+        if($rol)
+            return response()->json($rol, 200);
         else
             return response(['message'=> 'Rol bulunamadi'],404);
     }
@@ -60,15 +76,16 @@ class RolController extends Controller
      * @param  \App\Models\Rol  $rol
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Rol $rol)
+    public function update(Request $request, Rol $rol,$id)
     {
-        $rol->ad = $request->ad;
+        $rol = Rol::find($id);
+        $rol->rol_adi = $request->ad;
         $rol->save();
 
              return response([
                  'data' => $rol,
                  'message'=> 'Rol GÜNCELLENDİ'
-             ],201);
+             ],200);
     }
 
     /**
@@ -77,8 +94,14 @@ class RolController extends Controller
      * @param  \App\Models\Rol  $rol
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Rol $rol)
+    public function destroy(Rol $rol,$id)
     {
-        //
+        $rol = Rol::find($id);
+        $rol->delete();
+
+        return response([
+            'message'=> 'Rol silindi'
+             ],201);
+        
     }
 }

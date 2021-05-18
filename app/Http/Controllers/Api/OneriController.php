@@ -15,7 +15,7 @@ class OneriController extends Controller
      */
     public function index()
     {
-        //
+        //   return response(Rol::paginate(10), 200);
         return response()->json(Oneri::all());
     }
 
@@ -27,7 +27,16 @@ class OneriController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all(); //gelen tüm dataya erişim sağlar
+        //veri tabanına kaydetme
+       $oneri = new Oneri;
+       $oneri->ogun_adı = $request->ogun_adı;
+       $oneri->save();
+
+       return response([
+        'data' => $oneri,
+        'message'=> 'oneri oluşturuldu'
+    ],201);
     }
 
     /**
@@ -38,9 +47,9 @@ class OneriController extends Controller
      */
     public function show($id)
     {
-        $dyt = Oneri::find($id);
-        if($dyt)
-            return response()->json($dyt, 200);
+        $oneri = Oneri::find($id);
+        if($oneri)
+            return response()->json($oneri, 200);
         else
             return response(['message'=> 'Öneri bulunamadi'],404);
     }
@@ -54,7 +63,14 @@ class OneriController extends Controller
      */
     public function update(Request $request, Oneri $oneri)
     {
-        //
+        $oneri = Oneri::find($id);
+        $oneri->ogun_adı = $request->ogun_adı;
+        $oneri->save();
+
+       return response([
+        'data' => $oneri,
+        'message'=> 'oneri güncellendi'
+    ],200);
     }
 
     /**
@@ -63,8 +79,14 @@ class OneriController extends Controller
      * @param  \App\Models\Oneri  $oneri
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Oneri $oneri)
+    public function destroy(Oneri $oneri,$id)
     {
-        //
+        $oneri = Oneri::find($id);
+        $oneri->delete();
+
+        return response([
+            'message'=> 'Oneri silindi'
+             ],201);
+    
     }
 }
