@@ -32,17 +32,17 @@ class BesinController extends Controller
     {
         $input = $request->all(); //gelen tüm dataya erişim sağlar
         //veri tabanına kaydetme
-       $besin = new Besin;
-       $besin->besin_adi = $request->besin_adi;
-       $besin->besin_kalori = $request->besin_kalori;
-       $besin->besin_birimi = $request->besin_birimi;
-       $besin->besin_kategori_id = $request->besin_kategori_id;
-       $besin->save();
+        $besin = new Besin;
+        $besin->besin_adi = $request->besin_adi;
+        $besin->besin_kalori = $request->besin_kalori;
+        $besin->besin_birimi = $request->besin_birimi;
+        $besin->besin_kategori_id = $request->besin_kategori_id;
+        $besin->save();
 
-            return response([
-                'data' => $besin,
-                'message'=> 'besin oluşturuldu'
-            ],201);
+        return response([
+            'data' => $besin,
+            'message'=> 'besin oluşturuldu'
+        ],201);
     }
 
 
@@ -68,7 +68,7 @@ class BesinController extends Controller
      * @param  \App\Models\Besin  $besin
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Besin $besin)
+    public function update(Request $request, Besin $besin,$id)
     {
         //$input = $request->all();
         //$besin->update($input);
@@ -78,28 +78,28 @@ class BesinController extends Controller
         $besin->besin_birimi = $request->besin_birimi;
         $besin->besin_kategori_id = $request->besin_kategori_id;
         $besin->save();
- 
-             return response([
-                 'data' => $besin,
-                 'message'=> 'besin güncellendi'
-             ],200);
-    }
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Besin  $besin
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Besin $besin,$id)
-    {
-        $besin = Besin::find($id);
-        $besin->delete();
 
         return response([
-            'message'=> 'besin silindi'
-             ],201);
-        
+            'data' => $besin,
+            'message'=> 'besin güncellendi'
+        ],200);
     }
+
+
+/**
+ * Remove the specified resource from storage.
+ *
+ * @param  \App\Models\Besin  $besin
+ * @return \Illuminate\Http\Response
+ */
+public function destroy(Besin $besin,$id)
+{
+    $besin = Besin::find($id);
+    $besin->delete();
+
+    return response([
+        'message'=> 'besin silindi'
+    ],201);
+
+}
 }

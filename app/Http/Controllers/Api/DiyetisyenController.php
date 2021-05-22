@@ -78,7 +78,7 @@ class DiyetisyenController extends Controller
      * @param \App\Models\Diyetisyen $diyetisyen
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Diyetisyen $diyetisyen)
+    public function update(Request $request, Diyetisyen $diyetisyen,$id)
     {
         $diyetisyen = Diyetisyen::find($id);
         $diyetisyen->adi = $request->adi;
@@ -114,7 +114,7 @@ class DiyetisyenController extends Controller
         return response([
             'message'=> 'Diyetisyen silindi'
              ],201);
-        
+
     }
     public function  bul1() {
         return Diyetisyen::pluck('id'); //pluck metodu yalnızca bir kolonu almayı sağlar

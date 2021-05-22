@@ -62,12 +62,12 @@ class BesinKategoriController extends Controller
      * @param  \App\Models\BesinKategori  $besinKategori
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, BesinKategori $besinKategori)
+    public function update(Request $request, BesinKategori $besinKategori,$id)
     {
         $dyt = BesinKategori::find($id);
         $besinKategori->kategori_adi = $request->kategori_adi;
         $besinKategori->save();
- 
+
              return response([
                  'data' => $besinKategori,
                  'message'=> 'besin Kategori güncellendi'

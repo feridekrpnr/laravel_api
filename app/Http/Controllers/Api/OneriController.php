@@ -61,7 +61,7 @@ class OneriController extends Controller
      * @param  \App\Models\Oneri  $oneri
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Oneri $oneri)
+    public function update(Request $request, Oneri $oneri,$id)
     {
         $oneri = Oneri::find($id);
         $oneri->ogun_adı = $request->ogun_adı;
@@ -87,6 +87,6 @@ class OneriController extends Controller
         return response([
             'message'=> 'Oneri silindi'
              ],201);
-    
+
     }
 }

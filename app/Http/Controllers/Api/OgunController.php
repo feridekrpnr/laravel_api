@@ -61,17 +61,17 @@ class OgunController extends Controller
      * @param  \App\Models\Ogun  $ogun
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Ogun $ogun)
+    public function update(Request $request, Ogun $ogun,$id)
     {
         $ogun = Ogun::find($id);
         $ogun->ogun_adı = $request->ogun_adı;
         $ogun->save();
- 
+
              return response([
                  'data' => $ogun,
                  'message'=> 'ogun güncellendi'
              ],200);
-     }
+
     }
 
     /**

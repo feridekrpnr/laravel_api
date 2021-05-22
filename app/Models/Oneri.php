@@ -17,13 +17,14 @@ class Oneri extends Model
         return $this->belongsToMany(Besin::class,'oneri_besin','oneri_id','besin_id');
     }
 
-    public function onerilerim()
+    public function ogunonerilerim()
     {
         return $this->belongsToMany(Ogun::class,'oneri_ogun','oneri_id','ogun_id');
     }
 
-    public function onerilerim()
+    public function kaloriönerilerim()
     {
         return $this->belongsToMany(KaloriHesaplama::class,'oneri_kalori_hesaplama','oneri_id','kalori_hesaplama_id');
     }
+
 }

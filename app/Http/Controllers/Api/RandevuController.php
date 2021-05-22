@@ -64,7 +64,7 @@ class RandevuController extends Controller
      * @param  \App\Models\Randevu  $randevu
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Randevu $randevu)
+    public function update(Request $request, Randevu $randevu,$id)
     {
         $randevu = Randevu::find($id);
         $randevu->randevu_tarih = $request->randevu_tarih;
@@ -72,7 +72,7 @@ class RandevuController extends Controller
         $randevu->danisan_id = $request->danisan_id;
         $randevu->diyetisyen_id = $request->diyetisyen_id;
         $randevu->save();
- 
+
         return response([
          'data' => $randevu,
          'message'=> 'randevu güncellendi'

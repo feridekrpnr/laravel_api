@@ -28,7 +28,7 @@ class CreateDanisanlar extends Migration
             $table->integer('yas');
             $table->double('danisan_boy')->nullable();
             $table->double('danisan_kilo')->nullable();
-            $table->unsignedBigInteger('kullanici_id');
+            $table->unsignedBigInteger('kullanici_id')->unique();
             $table->foreign('kullanici_id')->references('id')->on('kullanicilar')->cascadeOnDelete()->cascadeOnUpdate();
 
 

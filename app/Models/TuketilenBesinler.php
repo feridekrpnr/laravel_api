@@ -11,18 +11,15 @@ class TuketilenBesinler extends Model
     public $timestamps = false;
     protected $table="tuketilen_besinler";
     protected $guarded=[];  //tabloların içini doldurmak için
-    
+
     public function besinlerim()
     {
         return $this->belongsToMany(KaloriHesaplama::class,'tuketilen_besinler_kalori_hesaplama','tuketilen_besinler_id','kalori_hesaplama_id');
     }
 
-    public function besinlerim()
+    public function tuketilenler()
     {
         return $this->belongsToMany(Besin::class,'besinler_tuketilen_besinler','tuketilen_besinler_id','besin_id');
     }
-    public function besinlerim()
-    {
-        return $this->belongsToMany(Ogun::class,'ogunler_tuketilen_besinler','tuketilen_besinler_id','ogun_id');
-    }
+
 }

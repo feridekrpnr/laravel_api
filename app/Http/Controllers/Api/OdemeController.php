@@ -27,7 +27,7 @@ class OdemeController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $input = $request->all(); //gelen tüm dataya erişim sağlar
         //veri tabanına kaydetme
        $odeme = new Odeme;
@@ -66,7 +66,7 @@ class OdemeController extends Controller
      * @param  \App\Models\Odeme  $odeme
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Odeme $odeme)
+    public function update(Request $request, Odeme $odeme,$id)
     {
         $odeme = Odeme::find($id);
         $odeme->odeme_tarih	 = $request->odeme_tarih	;

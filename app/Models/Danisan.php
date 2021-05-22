@@ -11,4 +11,9 @@ class Danisan extends Model
     protected $guarded=[];  //tabloların içini doldurmak için
     protected $table="danisanlar";
     public $timestamps=false;
+    public function kullanici()
+    {
+        return $this->hasOne(Kullanici::class,'danisan_id','id');
+    }
+
 }

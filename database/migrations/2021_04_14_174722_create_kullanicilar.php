@@ -21,7 +21,7 @@ class CreateKullanicilar extends Migration
 
             $table->dateTime('kayit_tarihi');
             $table->smallInteger('aktif');
-            $table->unsignedBigInteger('rol_id');
+            $table->unsignedBigInteger('rol_id')->unique();
             $table->foreign('rol_id')->references('id')->on('roller')->cascadeOnDelete()->cascadeOnUpdate();
         });
 

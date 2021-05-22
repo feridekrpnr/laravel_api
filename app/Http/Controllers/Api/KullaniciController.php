@@ -64,14 +64,14 @@ class KullaniciController extends Controller
      * @param  \App\Models\Kullanici  $kullanici
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Kullanici $kullanici)
+    public function update(Request $request, Kullanici $kullanici,$id)
     {
         $kullanici = Kullanici::find($id);
         $kullanici->kayit_tarihi = $request->kayit_tarihi;
         $kullanici->aktif = $request->aktif;
         $kullanici->rol_id = $request->rol_id;
         $kullanici->save();
- 
+
              return response([
                  'data' => $kullanici,
                  'message'=> 'kullanıcı güncellendi'

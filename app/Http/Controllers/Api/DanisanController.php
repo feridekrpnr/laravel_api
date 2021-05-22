@@ -79,7 +79,7 @@ class DanisanController extends Controller
      * @param \App\Models\Danisan $danisan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Danisan $danisan)
+    public function update(Request $request, Danisan $danisan,$id)
     {
         $danisan = Danisan::find($id);
         $danisan->adi = $request->adi;

@@ -62,14 +62,14 @@ class KaloriHesaplamaController extends Controller
      * @param  \App\Models\KaloriHesaplama  $kaloriHesaplama
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, KaloriHesaplama $kaloriHesaplama)
+    public function update(Request $request, KaloriHesaplama $kaloriHesaplama,$id)
     {
         $kaloriHesaplama = KaloriHesaplama::find($id);
         $kaloriHesaplama->tuketilen_kalori = $request->tuketilen_kalori;
         $kaloriHesaplama->oneri_id = $request->oneri_id ;
         $kaloriHesaplama->tuketilen_besin_id = $request->tuketilen_besin_id;
         $kaloriHesaplama->save();
- 
+
              return response([
                  'data' => $kaloriHesaplama,
                  'message'=> 'kaloriHesaplama güncellendi'

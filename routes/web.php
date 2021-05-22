@@ -46,4 +46,6 @@ use App\Http\Controllers\Api\BesinController;
 
 // });
 Route::get('/oneri',[\App\Http\Controllers\DenemeController::class,'oneri']);
+Route::get('/kullanici',[\App\Http\Controllers\DenemeController::class,'kullanici']);
+Route::get('/kullanici',[\App\Http\Controllers\DenemeController::class,'kullanici']);
 

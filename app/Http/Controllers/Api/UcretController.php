@@ -27,7 +27,7 @@ class UcretController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $input = $request->all(); //gelen tüm dataya erişim sağlar
         //veri tabanına kaydetme
        $ucret = new Ucret;
@@ -66,7 +66,7 @@ class UcretController extends Controller
      * @param  \App\Models\Ucret  $ucret
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Ucret $ucret)
+    public function update(Request $request, Ucret $ucret,$id)
     {
         $ucret = Ucret::find($id);
         $ucret->baslangıc_tarihi = $request->baslangıc_tarihi;
@@ -75,7 +75,7 @@ class UcretController extends Controller
         $ucret->periyot = $request->periyot;
         $ucret->diyetisyen_id = $request->diyetisyen_id;
         $ucret->save();
- 
+
              return response([
                  'data' => $ucret,
                  'message'=> 'ucret güncellendi'
@@ -96,6 +96,6 @@ class UcretController extends Controller
         return response([
             'message'=> 'Ucret silindi'
              ],201);
-        
+
     }
 }
