@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Oneri;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OneriController extends Controller
 {
@@ -88,5 +89,15 @@ class OneriController extends Controller
             'message'=> 'Oneri silindi'
              ],201);
 
+    }
+    public function report1()
+    {
+        return DB::table('oneri_ogun as onog')
+            ->selectRaw('on.name, COUNT(*) as total')
+            ->join('oneriler as on', 'on.id', '=', 'onog.oneri_id')
+            ->join('ogunler as og', 'og.id', '=', 'onog.ogun_id')
+            ->groupBy('on.name')
+            ->orderByRaw('COUNT(*) DESC')
+            ->get();
     }
 }

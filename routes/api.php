@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/diyetisyenler/bul1', [\App\Http\Controllers\Api\DiyetisyenController::class, 'bul1']); //diyetisyenlerin altında ozel bir metot
 
+Route::get('/diyetisyenler/bul2', [\App\Http\Controllers\Api\DiyetisyenController::class, 'bul2']); //diyetisyenlerin altında ozel bir metot
+
+Route::get('/oneriler/report1', [\App\Http\Controllers\Api\OneriController::class, 'report1']); //diyetisyenlerin altında ozel bir metot
+
+
 Route::get('roller',function(){
      return factory(Rol::class, 10)->make();
 });

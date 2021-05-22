@@ -117,7 +117,25 @@ class DiyetisyenController extends Controller
 
     }
     public function  bul1() {
-        return Diyetisyen::pluck('id'); //pluck metodu yalnızca bir kolonu almayı sağlar
+       // return Diyetisyen::pluck('id'); //pluck metodu yalnızca bir kolonu almayı sağlar
+        //return Diyetisyen::pluck('id','adi');
+      //return Diyetisyen::select('id','adi')->orderBy('created_at', 'desc')->take(10)->get();
+        return Diyetisyen::selectRow('id as diyetisyen_id','adi as diyetisyen_adi')
+            ->orderBy('created_at', 'desc')->take(10)->get();
+
     }
+    public function  bul2() {
+         $diyetisyenler = Diyetisyen::orderBy('created_at','desc')->take(10)->get();
+         $mapped = $diyetisyenler->map(function ($diyetisyen){
+             return[
+                 '_id' => $diyetisyen['id'],
+                 '_adi' => $diyetisyen['adi'],
+                 'puan' => $diyetisyen['puan']*1.05
+
+             ];
+
+         });
+    }
+
 
 }
