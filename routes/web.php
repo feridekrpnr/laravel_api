@@ -46,6 +46,14 @@ use App\Http\Controllers\Api\BesinController;
 
 // });
 Route::get('/oneri',[\App\Http\Controllers\DenemeController::class,'oneri']);
+Route::get('/getKullanici',[\App\Http\Controllers\DenemeController::class,'getKullanici']);
 Route::get('/kullanici',[\App\Http\Controllers\DenemeController::class,'kullanici']);
-Route::get('/kullanici',[\App\Http\Controllers\DenemeController::class,'kullanici']);
-
+Route::get('/getKullanici2',[\App\Http\Controllers\DenemeController::class,'getKullanici2']);
+Route::get('/getRol',[\App\Http\Controllers\DenemeController::class,'getRol']);
+Route::get('/getRol2',[\App\Http\Controllers\DenemeController::class,'getRol2']);
+Route::get('/getRandevuDiyetisyen',[\App\Http\Controllers\DenemeController::class,'getRandevuDiyetisyen']);
+Route::get('/getDiyetisyenRandevu',[\App\Http\Controllers\DenemeController::class,'getDiyetisyenRandevu']);
+Route::get('/getRolDiyetisyen',[\App\Http\Controllers\DenemeController::class,'getRolDiyetisyen']);
+Route::get('/getRolDanisan',[\App\Http\Controllers\DenemeController::class,'getRolDanisan']);
+Route::get('/ getDiyetisyenOneri',[\App\Http\Controllers\DenemeController::class,' getDiyetisyenOneri']);
+Route::get('/ getOneriDiyetisyen',[\App\Http\Controllers\DenemeController::class,' getOneriDiyetisyen']);

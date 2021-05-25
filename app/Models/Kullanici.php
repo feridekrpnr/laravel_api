@@ -11,4 +11,9 @@ class Kullanici extends Model
     protected $guarded=[];  //tabloların içini doldurmak için
     protected $table="kullanicilar";
     public $timestamps=false;
+
+    public function getRol()
+    {
+        return $this->hasOne(App\Models\Rol::class,'rol_id','roller');
+    }
 }

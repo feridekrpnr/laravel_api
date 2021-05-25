@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\Diyetisyen;
 class Oneri extends Model
 {
     use HasFactory;
@@ -26,5 +26,10 @@ class Oneri extends Model
     {
         return $this->belongsToMany(KaloriHesaplama::class,'oneri_kalori_hesaplama','oneri_id','kalori_hesaplama_id');
     }
+    public function getOneriDiyetisyen()
+    {
+        return $this->hasOne(App\Models\Diyetisyen::class,'diyetisyen_id','diyetisyenler');
+    }
+    
 
 }

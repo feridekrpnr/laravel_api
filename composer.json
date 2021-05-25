@@ -11,7 +11,8 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
-      "ext-mysqli": "*"
+      "ext-mysqli": "*",
+      "ext-cassandra": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

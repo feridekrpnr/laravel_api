@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Kullanici;
+use App\Models\Rol;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 //C:\Users\ASUS\Downloads\laravel_api\routes\api.php
@@ -13,6 +15,14 @@ Route::get('/diyetisyenler/bul1', [\App\Http\Controllers\Api\DiyetisyenControlle
 Route::get('/diyetisyenler/bul2', [\App\Http\Controllers\Api\DiyetisyenController::class, 'bul2']); //diyetisyenlerin altında ozel bir metot
 
 Route::get('/oneriler/report1', [\App\Http\Controllers\Api\OneriController::class, 'report1']); //diyetisyenlerin altında ozel bir metot
+
+Route::get('/diyetisyenler/diyetisyen1', [\App\Http\Controllers\Api\DiyetisyenController::class, 'diyetisyen1']); //diyetisyenlerin altında ozel bir metot
+
+Route::get('/oneriler/report2', [\App\Http\Controllers\Api\OneriController::class, 'report2']); //önerilerin altında ozel bir metot
+
+Route::get('/danisanlar/getKullanici', [\App\Http\Controllers\Api\DenemeController::class, 'getKullanici']); //önerilerin altında ozel bir metot
+
+Route::get('/diyetisyenler/getKullanici2', [\App\Http\Controllers\Api\DenemeController::class, 'getKullanici2']); //önerilerin altında ozel bir metot
 
 
 Route::get('roller',function(){

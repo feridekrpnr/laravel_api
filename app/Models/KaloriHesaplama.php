@@ -10,7 +10,7 @@ class KaloriHesaplama extends Model
     use HasFactory;
     protected $guarded=[];  //tabloların içini doldurmak için
     protected $table="kalori_hesaplama";
-    public $timestamps=false;
+   // public $timestamps=false;
 
     public function onerilerim()
     {

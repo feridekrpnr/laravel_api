@@ -5,10 +5,18 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Diyetisyen;
+use Cassandra\Type\Collection;
 use Illuminate\Http\Request;
-
+use App\Http\Resources\DiyetisyenResource;
+use App\Http\Resources\DiyetisyenCollection;
+/**
+ * @property  collection
+ */
 class DiyetisyenController extends Controller
 {
+    public string $collection = 'App\Http\Recources\DiyetisyenRecource';
+
+
     /**
      * Display a listing of the resource.
      *
@@ -135,7 +143,31 @@ class DiyetisyenController extends Controller
              ];
 
          });
-    }
 
+    }
+    public function  diyetisyen1() {
+
+       // $diyetisyen2= Diyetisyen::find(2);
+        //return new DiyetisyenResource($diyetisyen2);
+
+        // birden fazla kayıt getirmek istediğimizde:
+        $diyetisyenler= Diyetisyen::all();
+       // return DiyetisyenResource::collection($diyetisyenler);
+
+        //ek kolon tanımlamak için:
+        return new DiyetisyenCollection($diyetisyenler);
+
+       //ek kolon için ayrı dosya oluşturmadan:
+
+      /*return DiyetisyenResource::collection($diyetisyenler)->additional([
+        'meta'=>[
+            'total_diyetisyenler'=>$this->collection->count(),
+            'diyetisyen' => 'value'
+        ]
+
+      ]);
+*/
+
+    }
 
 }

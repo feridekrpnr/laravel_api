@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\Kullanici;
+use App\Models\Diyetisyen;
 class Rol extends Model
 {
     //protected $fillable = ['name'];
@@ -13,4 +14,13 @@ class Rol extends Model
     protected $table="roller";
     protected $guarded=[];  //tabloların içini doldurmak için
 
+    public function getRol2()
+    {
+        return $this->hasMany(App\Model\Kullanici::class,'kullanicilar');
+    }
+
+    public function getRolDiyetisyen()
+    {
+        return $this->hasMany(App\Model\Diyetisyen::class,'diyetisyen');
+    }
 }

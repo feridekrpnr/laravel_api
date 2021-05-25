@@ -100,4 +100,13 @@ class OneriController extends Controller
             ->orderByRaw('COUNT(*) DESC')
             ->get();
     }
+
+    //Dokuman:Sayfa 40
+    public function report2()
+    {
+        oneriler = Oneri::paginate(2);
+        return OneriRecource::collection($oneriler);
+    }
+    
+
 }
