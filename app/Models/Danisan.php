@@ -11,15 +11,20 @@ class Danisan extends Model
     use HasFactory;
     protected $guarded=[];  //tabloların içini doldurmak için
     protected $table="danisanlar";
-    public $timestamps=false;
+    public $timestamps =  false;
 
     public function getKullanici()
     {
-        return $this->hasOne(App\Model\Kullanici::class,'kullanici_id','kullanicilar');
+        return $this->hasOne(Kullanici::class,'kullanici_id','kullanicilar');
     }
     public function getRolDanisan()
     {
-        return $this->hasMany(App\Model\Rol::class,'roller');
+        return $this->hasMany(Rol::class,'roller');
     }
+    public function gettuketdanısan()
+    {
+        return $this->belongsToMany(TuketilenBesinler::class,'tuketilen_besinler');
+    }
+
 
 }

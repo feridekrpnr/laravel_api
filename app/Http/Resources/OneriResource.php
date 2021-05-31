@@ -15,9 +15,10 @@ class OneriResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id'=>$this->id,
             'oneri_tarih'=> $this->oneri_tarih,
             'oneri_aciklama'=> $this->oneri_aciklama,
-            
+
         ];
     }
 }

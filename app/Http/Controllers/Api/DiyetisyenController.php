@@ -129,11 +129,11 @@ class DiyetisyenController extends Controller
         //return Diyetisyen::pluck('id','adi');
       //return Diyetisyen::select('id','adi')->orderBy('created_at', 'desc')->take(10)->get();
         return Diyetisyen::selectRow('id as diyetisyen_id','adi as diyetisyen_adi')
-            ->orderBy('created_at', 'desc')->take(10)->get();
+            ->orderBy('created_at', 'desc')->take(2)->get();
 
     }
     public function  bul2() {
-         $diyetisyenler = Diyetisyen::orderBy('created_at','desc')->take(10)->get();
+         $diyetisyenler = Diyetisyen::orderBy('id','desc')->take(2)->get();
          $mapped = $diyetisyenler->map(function ($diyetisyen){
              return[
                  '_id' => $diyetisyen['id'],

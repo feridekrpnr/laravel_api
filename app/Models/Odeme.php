@@ -10,5 +10,5 @@ class Odeme extends Model
     use HasFactory;
     protected $guarded=[];  //tabloların içini doldurmak için
     protected $table="odemeler";
-    public $timestamps=false;
+    public $timestamps = false;
 }

@@ -14,6 +14,10 @@ class DanisanResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'id'=>$this->id,
+            'adi'=>$this->adi,
+            'soyad'=>$this->soyad,
+        ];
     }
 }

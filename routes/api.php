@@ -16,13 +16,27 @@ Route::get('/diyetisyenler/bul2', [\App\Http\Controllers\Api\DiyetisyenControlle
 
 Route::get('/oneriler/report1', [\App\Http\Controllers\Api\OneriController::class, 'report1']); //diyetisyenlerin altında ozel bir metot
 
+Route::get('/ogunler/cek2', [\App\Http\Controllers\Api\OgunController::class, 'cek2']); //diyetisyenlerin altında ozel bir metot
+
 Route::get('/diyetisyenler/diyetisyen1', [\App\Http\Controllers\Api\DiyetisyenController::class, 'diyetisyen1']); //diyetisyenlerin altında ozel bir metot
 
 Route::get('/oneriler/report2', [\App\Http\Controllers\Api\OneriController::class, 'report2']); //önerilerin altında ozel bir metot
 
-Route::get('/danisanlar/getKullanici', [\App\Http\Controllers\Api\DenemeController::class, 'getKullanici']); //önerilerin altında ozel bir metot
+Route::get('/oneriler/report3', [\App\Http\Controllers\Api\OneriController::class, 'report3']); //önerilerin altında ozel bir metot
 
-Route::get('/diyetisyenler/getKullanici2', [\App\Http\Controllers\Api\DenemeController::class, 'getKullanici2']); //önerilerin altında ozel bir metot
+Route::get('/danisanlar/getKullanici', [\App\Http\Controllers\DenemeController::class, 'getKullanici']); //önerilerin altında ozel bir metot
+
+Route::get('/diyetisyenler/getKullanici2', [\App\Http\Controllers\DenemeController::class, 'getKullanici2']); //önerilerin altında ozel bir metot
+
+Route::get('/oneriler/getdiyetisyenonerisi', [\App\Http\Controllers\Api\OneriController::class, 'getdiyetisyenonerisi']); //önerilerin altında ozel bir metot
+
+Route::get('/tuketilen_besinler/getbestukbes', [\App\Http\Controllers\Api\TuketilenBesinlerController::class, 'getbestukbes']);
+
+Route::get('/tuketilen_besinler/kaloritüketilen', [\App\Http\Controllers\Api\TuketilenBesinlerController::class, 'kaloritüketilen']);
+
+Route::get('/tuketilen_besinler/oguntuketilen', [\App\Http\Controllers\Api\TuketilenBesinlerController::class, 'oguntuketilen']);
+
+Route::get('/tuketilen_besinler/danistuketilen', [\App\Http\Controllers\Api\TuketilenBesinlerController::class, 'danistuketilen']);
 
 
 Route::get('roller',function(){

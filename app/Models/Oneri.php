@@ -10,7 +10,7 @@ class Oneri extends Model
     use HasFactory;
     protected $guarded=[];  //tabloların içini doldurmak için
     protected $table="oneriler";
-    public $timestamps=false;
+    public $timestamps =  false;
 
     public function onerilerim()
     {
@@ -28,8 +28,8 @@ class Oneri extends Model
     }
     public function getOneriDiyetisyen()
     {
-        return $this->hasOne(App\Models\Diyetisyen::class,'diyetisyen_id','diyetisyenler');
+        return $this->hasOne(Diyetisyen::class,'diyetisyen_id','diyetisyenler');
     }
-    
+
 
 }

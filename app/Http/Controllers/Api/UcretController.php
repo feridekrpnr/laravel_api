@@ -48,13 +48,14 @@ class UcretController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Ucret  $ucret
+     * @return \Illuminate\Http\JsonResponse
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         $ucret = Ucret::find($id);
         if($ucret)
-            return response()->json($ducretyt, 200);
+            return response()->json($ucret, 200);
         else
             return response(['message'=> 'Ücret bulunamadi'],404);
     }

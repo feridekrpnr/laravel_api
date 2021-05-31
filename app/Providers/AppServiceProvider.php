@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Providers;
-use Illuminate\Http\jResourcesson\Json\Recource;
+use Illuminate\Http\Resources;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //Resource::withoutWrapping(); //data anahtarının gelmesini önler
+        Resources\Json\JsonResource::withoutWrapping(); //data anahtarının gelmesini önler
 
     }
 }

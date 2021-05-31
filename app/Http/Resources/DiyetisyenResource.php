@@ -18,7 +18,7 @@ class DiyetisyenResource extends JsonResource
             'id'=> $this->id,
             'adi'=> $this->adi,
             'soyad'=> $this->soyad,
-            'yas'=> $this->yas,
+            'puan'=> $this->puan,
 
         ];
     }

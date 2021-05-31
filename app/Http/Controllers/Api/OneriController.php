@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\OneriWithDiyetisyenResource;
 use App\Models\Oneri;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Resources\OneriResource;
 
 class OneriController extends Controller
 {
@@ -93,20 +95,27 @@ class OneriController extends Controller
     public function report1()
     {
         return DB::table('oneri_ogun as onog')
-            ->selectRaw('on.name, COUNT(*) as total')
+            ->selectRaw('on.oneri_aciklama, og.ogun_adı, COUNT(*) as total')
             ->join('oneriler as on', 'on.id', '=', 'onog.oneri_id')
             ->join('ogunler as og', 'og.id', '=', 'onog.ogun_id')
-            ->groupBy('on.name')
+            ->groupBy('on.oneri_aciklama','og.ogun_adı')
             ->orderByRaw('COUNT(*) DESC')
             ->get();
     }
 
+
+
     //Dokuman:Sayfa 40
     public function report2()
     {
-        oneriler = Oneri::paginate(2);
-        return OneriRecource::collection($oneriler);
+        $oneriler = Oneri::paginate(2);
+        return OneriResource::collection($oneriler);
     }
-    
+
+    public function getdiyetisyenonerisi()
+    {
+        $oneriler = Oneri::paginate(2);
+        return OneriWithDiyetisyenResource::collection($oneriler);
+    }
 
 }

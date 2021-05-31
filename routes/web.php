@@ -57,3 +57,5 @@ Route::get('/getRolDiyetisyen',[\App\Http\Controllers\DenemeController::class,'g
 Route::get('/getRolDanisan',[\App\Http\Controllers\DenemeController::class,'getRolDanisan']);
 Route::get('/ getDiyetisyenOneri',[\App\Http\Controllers\DenemeController::class,' getDiyetisyenOneri']);
 Route::get('/ getOneriDiyetisyen',[\App\Http\Controllers\DenemeController::class,' getOneriDiyetisyen']);
+Route::get('/ cek',[\App\Http\Controllers\Api\RandevuController::class,' cek']);
+Route::get('/ getDanisanOneri',[\App\Http\Controllers\DenemeController::class,' getDanisanOneri']);

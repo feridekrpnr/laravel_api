@@ -9,13 +9,11 @@ use App\Models\Danisan;
 use App\Models\Rol;
 use App\Models\Randevu;
 use App\Models\Kullanici;
-use Database\Migrations\Kullanicilar;
-use Database\Migrations\Randevular;
 
 class DenemeController extends Controller
 {
-    protected $table="randevular";
-   
+
+
     public function oneri()
     {
        //dd(Ogun::find(1)->onerilerim);
@@ -65,16 +63,17 @@ class DenemeController extends Controller
     //diyetisyen-randevu diyetisyen id ye göre tüm randevuları getir
     public function getRandevuDiyetisyen()
     {
-        //$kullanici=Diyetisyen::find(2);
+        $kullanici=Diyetisyen::find(2);
         //print_r($kullanici);
         //echo $kullanici->kullanici_id. '-Kullanıcı id:' .$kullanici->getKullanici2->rol_adi;
         //return $kullanici->kullanıcı_id;
-       // echo Randevu::all();
-       foreach ($Diyetisyen as $getRandevular => $randevu) {
-        echo $randevu->randevu_tarih. "<hr/>";
-       }
-           
-       }
+        //echo Randevu::all();
+       // foreach (Diyetisyen as $getRandevular => $randevu) {
+         //   echo $randevu->randevu_tarih . "<hr/>";
+
+        //}
+
+
     }
 
     //id=1 olan randevu içeriği
@@ -100,11 +99,12 @@ class DenemeController extends Controller
         $kullanici=Rol::all();
         //print_r($kullanici);
         //echo $kullanici->kullanici_id. '-Kullanıcı id:' .$kullanici->getKullanici2->rol_adi;
-        return $kullanici->kullanıcı_id;
+       // return $kullanici->kullanıcı_id;
        //echo Danisan::all(); //Tüm danısanlar ve tüm bilgileri
-      //echo Danisan::find(4)->adi.  "<br />"; //danisan_id=4 olanın adi
+      echo Danisan::find(4)->adi.  "<br />"; //danisan_id=4 olanın adi
     }
     //id si şu olan diyetisyenin öneri sayısı
+
     public function  getDiyetisyenOneri()
     {
        // $diyetisyen=Diyetisyen::find(1);
@@ -115,11 +115,21 @@ class DenemeController extends Controller
       //  echo Danisan::all();
       echo "Diyetisyen Sayısı: ".count($diyetisyen-> getOneriler);
     }
+    public function  getDanisanOneri()
+    {
+        // $diyetisyen=Diyetisyen::find(1);
+        $danisan=Oneri::all();
+        //print_r($kullanici);
+        //echo $kullanici->kullanici_id. '-Kullanıcı id:' .$kullanici->getKullanici2->rol_adi;
+        //return $kullanici->kullanıcı_id;
+        //  echo Danisan::all();
+        echo "Diyetisyen Sayısı: ".count($danisan-> getdanisanlar);
+    }
     public function  getOneriDiyetisyen()
     {
-        $diyetisyen=Diyetisyen::find(1);
+        $kullanici=Diyetisyen::find(1);
        // $diyetisyen=Diyetisyen::all();
-        print_r($diyetisyen);
+        print_r($kullanici);
         //echo $kullanici->kullanici_id. '-Kullanıcı id:' .$kullanici->getKullanici2->rol_adi;
         //return $kullanici->kullanıcı_id;
         //echo "Diyetisyen Sayısı: ".count($diyetisyen-> getOneriler);

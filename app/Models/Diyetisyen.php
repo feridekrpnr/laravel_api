@@ -13,23 +13,23 @@ class Diyetisyen extends Model
     use HasFactory;
     protected $guarded=[];  //tabloların içini doldurmak için
     protected $table="diyetisyenler";
-    public $timestamps=false;
+    public $timestamps =  false;
 
     public function getKullanici2()
     {
-        return $this->hasOne(App\Model\Kullanici::class,'kullanici_id','kullanicilar');
+        return $this->hasOne(Kullanici::class,'kullanici_id','kullanicilar');
     }
     public function getDiyetisyenRandevu()
     {
-        return $this->hasMany(App\Model\Randevu::class,'randevular');
+        return $this->hasMany(Randevu::class,'randevular');
     }
     public function getRolDiyetisyen()
     {
-        return $this->hasMany(App\Model\Rol::class,'roller');
+        return $this->hasMany(Rol::class,'roller');
     }
     public function getDiyetisyenOneri()
     {
-        return $this->hasMany(App\Models\Oneri::class,'oneriler');
+        return $this->belongsto(Oneri::class,'oneriler');
     }
 }
 

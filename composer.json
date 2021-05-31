@@ -12,7 +12,8 @@
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
       "ext-mysqli": "*",
-      "ext-cassandra": "*"
+      "ext-cassandra": "*",
+      "ext-pdo": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

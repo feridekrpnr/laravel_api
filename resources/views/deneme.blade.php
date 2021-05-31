@@ -8,6 +8,7 @@
     <title>Document</title>
 </head>
 <body>
+
 @foreach($data as $rs)
 <h2>{{ $rs->mail }}</h2>
 <a href="{{route('get_diyetisyen', ['id' => $rs->id])}}"> Show</a>

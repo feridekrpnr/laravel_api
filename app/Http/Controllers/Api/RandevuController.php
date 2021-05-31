@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Diyetisyen;
 use App\Models\Randevu;
 use Illuminate\Http\Request;
 
@@ -93,5 +94,9 @@ class RandevuController extends Controller
         return response([
          'message'=> 'randevu silindi'
      ],201);
+    }
+    public function cek($id){
+        $a=Diyetisyen::where($id,$id)->get();
+        return $a;
     }
 }

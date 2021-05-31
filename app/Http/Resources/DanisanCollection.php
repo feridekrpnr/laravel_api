@@ -14,6 +14,12 @@ class DanisanCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'data'=> $this->collection,
+            'meta'=>[
+                'total_danisanlar'=>$this->collection->count(),
+                'danisan' => 'value'
+            ]
+        ];
     }
 }

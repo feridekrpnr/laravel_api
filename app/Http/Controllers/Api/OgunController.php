@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Ogun;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OgunController extends Controller
 {
@@ -89,4 +90,15 @@ class OgunController extends Controller
             'message'=> 'ogun silindi'
              ],201);
     }
+    public function cek2()
+    {
+        return DB::table('oneri_ogun as onog')
+            ->selectRaw('og.ogun_adı, COUNT(*) as total')
+            ->join('ogunler as og', 'og.id', '=', 'onog.ogun_id')
+            ->join('oneriler as on', 'on.id', '=', 'onog.oneri_id')
+            ->groupBy('og.ogun_adı')
+            ->orderByRaw('COUNT(*) DESC')
+            ->get();
+    }
+
 }
