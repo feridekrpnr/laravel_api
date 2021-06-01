@@ -8,6 +8,7 @@ use App\Http\Resources\DanisanWithDiyetisyenEslesmeResource;
 use App\Http\Resources\DiyetisyenWithDanisanEslesmeResource;
 use App\Models\Diyetisyen;
 use Cassandra\Type\Collection;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Request;
 use App\Http\Resources\DiyetisyenResource;
 use App\Http\Resources\DiyetisyenCollection;
@@ -46,13 +47,16 @@ class DiyetisyenController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'mail' => 'required|email|unique:diyetisyenler',
+            'adi' =>  'required|string|max:50',
+            'parola' =>'required'
+    ]);
         $input = $request->all(); //gelen tüm dataya erişim sağlar
         //veri tabanına kaydetme
         $diyetisyen = new Diyetisyen;
         $diyetisyen->adi = $request->adi;
         $diyetisyen->soyad = $request->soyad;
-        $diyetisyen->mail = $request->mail;
-        $diyetisyen->parola = $request->parola;
         $diyetisyen->tc = $request->tc;
         $diyetisyen->telefon = $request->telefon;
         $diyetisyen->cinsiyet = $request->cinsiyet;
@@ -178,13 +182,14 @@ class DiyetisyenController extends Controller
         $danisanlarim = Diyetisyen::paginate(2);
         return DanisanWithDiyetisyenEslesmeResource::collection($danisanlarim);
     }
+
     public function danisanlarim1()
     {
         return DB::table('eslesme_tablosu as estab')
-            ->selectRaw('di.adi, da.adi, COUNT(*) as total')
+            ->selectRaw('di.adi, da.adi,di.soyad,da.soyad,COUNT(*) as total')
             ->join('diyetisyenler as di', 'di.id', '=', 'estab.diyetisyen_id')
             ->join('danisanlar as da', 'da.id', '=', 'estab.danisan_id')
-            ->groupBy('di.adi','da.adi')
+            ->groupBy('di.adi','da.adi','di.soyad','da.soyad' )
             ->orderByRaw('COUNT(*) DESC')
             ->get();
     }

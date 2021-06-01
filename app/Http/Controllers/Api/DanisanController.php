@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Api;
 
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\DiyetisyenWithDanisanEslesmeResource;
 use App\Models\Danisan;
 use App\Models\Diyetisyen;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Request;
 
 class DanisanController extends Controller
@@ -36,6 +38,7 @@ class DanisanController extends Controller
     public function store(Request $request)
 
     {
+
         $input = $request->all(); //gelen tüm dataya erişim sağlar
         //veri tabanına kaydetme
        $danisan = new Danisan;
@@ -119,8 +122,8 @@ class DanisanController extends Controller
     }
     public function eslemeDiyetisyen1()
     {
-        $diyetisyenKim = Diyetisyen::paginate(2);
-        return KaloriHesaplamaWithTüketilenBesinlerResource::collection($diyetisyenKim);
+        $diyetisyenKim = Danisan::paginate(2);
+        return DiyetisyenWithDanisanEslesmeResource::collection($diyetisyenKim);
     }
 
 }

@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateOdemeler extends Migration
@@ -20,7 +21,6 @@ class CreateOdemeler extends Migration
 
             $table->id();
             $table->dateTime('odeme_tarih')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->text('oneri_aciklama',350);
 
             //$table->unsignedBigInteger('odemeturu_id');
             $table->unsignedBigInteger('diyetisyen_id');

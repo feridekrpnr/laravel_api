@@ -15,7 +15,7 @@ class DiyetisyenResource extends JsonResource
     public function toArray($request)
     {
         return [
-            //'id'=> $this->id,
+            'id'=> $this->id,
             'adi'=> $this->adi,
             'soyad'=> $this->soyad,
         //    'puan'=> $this->puan,

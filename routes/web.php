@@ -14,10 +14,13 @@ use App\Http\Controllers\Api\BesinController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', function () {
+    return "Hello";
+});
 
 
- Route::get('/', function () {
-     return "Hello";
+ Route::get('/secured', function () {
+     return "authenticat :)";
  });
 // Route::prefix('api')->group(function () {
 //     Route::get('/diyetisyenler', [DiyetisyenController::class, 'index']);

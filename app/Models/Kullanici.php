@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Kullanici extends Model
 {
+
     use HasFactory;
     protected $guarded=[];  //tabloların içini doldurmak için
     protected $table="kullanicilar";
@@ -14,6 +15,6 @@ class Kullanici extends Model
 
     public function getRol()
     {
-        return $this->hasOne(App\Models\Rol::class,'rol_id','roller');
+        return $this->hasOne(Rol::class,'rol_id','roller');
     }
 }

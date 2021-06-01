@@ -20,8 +20,6 @@ class CreateDanisanlar extends Migration
             $table->id();
             $table->string('adi', 30);
             $table->string('soyad', 30);
-            $table->string('mail', 150)->unique();
-            $table->string('parola', 12);
             $table->string('tc',11)->unique();
             $table->string('telefon', 11);
             $table->smallInteger('cinsiyet');
