@@ -38,6 +38,12 @@ Route::get('/tuketilen_besinler/oguntuketilen', [\App\Http\Controllers\Api\Tuket
 
 Route::get('/tuketilen_besinler/danistuketilen', [\App\Http\Controllers\Api\TuketilenBesinlerController::class, 'danistuketilen']);
 
+Route::get('/danisanlar/eslemeDiyetisyen1', [\App\Http\Controllers\Api\DanisanController::class, 'eslemeDiyetisyen1']);
+
+Route::get('/diyetisyenler/eslemeDanisanlarim', [\App\Http\Controllers\Api\DiyetisyenController::class, 'eslemeDanisanlarim']);
+
+Route::get('/diyetisyenler/danisanlarim1', [\App\Http\Controllers\Api\DiyetisyenController::class, 'danisanlarim1']);
+
 
 Route::get('roller',function(){
      return factory(Rol::class, 10)->make();

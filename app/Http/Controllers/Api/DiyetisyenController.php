@@ -4,17 +4,21 @@ namespace App\Http\Controllers\Api;
 
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\DanisanWithDiyetisyenEslesmeResource;
+use App\Http\Resources\DiyetisyenWithDanisanEslesmeResource;
 use App\Models\Diyetisyen;
 use Cassandra\Type\Collection;
 use Illuminate\Http\Request;
 use App\Http\Resources\DiyetisyenResource;
 use App\Http\Resources\DiyetisyenCollection;
+use Illuminate\Support\Facades\DB;
+
 /**
  * @property  collection
  */
 class DiyetisyenController extends Controller
 {
-    public string $collection = 'App\Http\Recources\DiyetisyenRecource';
+
 
 
     /**
@@ -169,5 +173,19 @@ class DiyetisyenController extends Controller
 */
 
     }
-
+    public function eslemeDanisanlarim()
+    {
+        $danisanlarim = Diyetisyen::paginate(2);
+        return DanisanWithDiyetisyenEslesmeResource::collection($danisanlarim);
+    }
+    public function danisanlarim1()
+    {
+        return DB::table('eslesme_tablosu as estab')
+            ->selectRaw('di.adi, da.adi, COUNT(*) as total')
+            ->join('diyetisyenler as di', 'di.id', '=', 'estab.diyetisyen_id')
+            ->join('danisanlar as da', 'da.id', '=', 'estab.danisan_id')
+            ->groupBy('di.adi','da.adi')
+            ->orderByRaw('COUNT(*) DESC')
+            ->get();
+    }
 }

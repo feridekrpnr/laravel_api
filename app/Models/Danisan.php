@@ -25,6 +25,9 @@ class Danisan extends Model
     {
         return $this->belongsToMany(TuketilenBesinler::class,'tuketilen_besinler');
     }
-
+    public function eslesmediyetisyen()
+    {
+        return $this->belongsToMany(Diyetisyen::class,'eslesme_tablosu','danisan_id','diyetisyen_id');
+    }
 
 }

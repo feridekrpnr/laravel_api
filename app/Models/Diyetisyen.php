@@ -31,5 +31,11 @@ class Diyetisyen extends Model
     {
         return $this->belongsto(Oneri::class,'oneriler');
     }
+    public function eslesmedanisan()
+    {
+        return $this->belongsToMany(Danisan::class,'eslesme_tablosu','diyetisyen_id','danisan_id');
+    }
+
+
 }
 

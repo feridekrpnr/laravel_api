@@ -93,4 +93,10 @@ class KullaniciController extends Controller
             'message'=> 'Kullanici silindi'
              ],201);
     }
+   /* public function danisdiyet()
+    {
+        $kullanici = Kullanici::paginate(2);
+        return BesinlerWithTüketilenBesinlerResource::collection($kullanici);
+    }
+    */
 }

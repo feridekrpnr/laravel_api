@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class DiyetisyenResource extends JsonResource
+class DanisanWithDiyetisyenEslesmeResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,11 +14,14 @@ class DiyetisyenResource extends JsonResource
      */
     public function toArray($request)
     {
-        return [
-            //'id'=> $this->id,
-            'adi'=> $this->adi,
-            'soyad'=> $this->soyad,
-        //    'puan'=> $this->puan,
+        return[
+            // 'id'=>$this->id,
+            'adi'=>$this->adi,
+            'soyad'=>$this->soyad,
+
+            'danisanlar'=>DanisanResource::collection($this->eslesmedanisan),
+
+
 
         ];
     }

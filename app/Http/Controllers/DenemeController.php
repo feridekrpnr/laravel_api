@@ -85,6 +85,16 @@ class DenemeController extends Controller
         //return $kullanici->kullanıcı_id;
         //echo Kullanici::find(1)->all();
     }
+
+    public function eslesmediyetisyen()
+    {
+        $danisan=Danisan::find(1);
+        print_r($danisan);
+        //echo $kullanici->kullanici_id. '-Kullanıcı id:' .$kullanici->getKullanici2->rol_adi;
+        //return $kullanici->kullanıcı_id;
+        //echo Kullanici::find(1)->all();
+    }
+
     //Rolü diyetisyen olan kullanıcıları getir
     public function getRolDiyetisyen()
     {

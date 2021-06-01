@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Danisan;
+use App\Models\Diyetisyen;
 use Illuminate\Http\Request;
 
 class DanisanController extends Controller
@@ -116,6 +117,10 @@ class DanisanController extends Controller
             'message'=> ' Danışan silindi'
              ],201);
     }
-
+    public function eslemeDiyetisyen1()
+    {
+        $diyetisyenKim = Diyetisyen::paginate(2);
+        return KaloriHesaplamaWithTüketilenBesinlerResource::collection($diyetisyenKim);
+    }
 
 }
