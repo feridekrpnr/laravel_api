@@ -35,7 +35,7 @@ class CreateDanisanlar extends Migration
 
     /**
      * Reverse the migrations.
-     *
+     *neverse the migration
      * @return void
      */
     public function down()
