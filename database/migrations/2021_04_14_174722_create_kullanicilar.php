@@ -19,6 +19,9 @@ class CreateKullanicilar extends Migration
             $table->engine = 'InnoDB';
             $table->id();
             $table->bigInteger('rol');
+            $table->string('email'); //string varchar yapar var mı başka bişey? bide controllerları oluşturduk
+            $table->string('token');
+            $table->string('password');
             $table->unsignedBigInteger('rol_id');
             $table->foreign('rol_id')->references('id')->on('roller')->cascadeOnDelete()->cascadeOnUpdate();
         });
