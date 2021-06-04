@@ -18,9 +18,7 @@ class CreateKullanicilar extends Migration
             $table->collation = 'utf8mb4_turkish_ci';
             $table->engine = 'InnoDB';
             $table->id();
-
-            $table->dateTime('kayit_tarihi');
-            $table->smallInteger('aktif');
+            $table->bigInteger('rol');
             $table->unsignedBigInteger('rol_id');
             $table->foreign('rol_id')->references('id')->on('roller')->cascadeOnDelete()->cascadeOnUpdate();
         });

@@ -8,7 +8,7 @@ use App\Models\Danisan;
 use App\Models\Randevu;
 use Illuminate\Http\Request;
 
-class RandevuController extends Controller
+class DanisanRandevuController extends Controller
 {
     /**
      * Display a listing of the resource.

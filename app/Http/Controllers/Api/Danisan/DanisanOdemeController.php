@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Danisan;
+use App\Models\Diyetisyen;
 use App\Models\Odeme;
+use App\Models\Ucret;
 use Illuminate\Http\Request;
 
-class OdemeController extends Controller
+class DanisanOdemeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +20,7 @@ class OdemeController extends Controller
     {
         //   return response(Rol::paginate(10), 200);
         $odemeler=Odeme::all();
-        foreach($odemeler as $key => $oneri){
+        foreach($odemeler as $key => $odeme){ 
             $odemeler[$key]->diyetisyen_adi=Diyetisyen::find($odeme->diyetisyen_id)->adi;
             $odemeler[$key]->danisan_adi=Danisan::find($odeme->danisan_id)->adi;
             $odemeler[$key]->ucret=Ucret::find($odeme->ucret_id)->ucret;

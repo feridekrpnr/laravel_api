@@ -4,6 +4,8 @@ use App\Models\Kullanici;
 use App\Models\Rol;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\Diyetisyen;
+use App\Http\Middleware\Danisan;
 //C:\Users\ASUS\Downloads\laravel_api\routes\api.php
 
 
@@ -70,19 +72,38 @@ Route::apiResources([
      'kaloriHesaplama' => \App\Http\Controllers\Api\KaloriHesaplamaController::class,
 ]);
 
-     Route::get('/diyetisyenler', [\App\Http\Controllers\Api\DiyetisyenController::class, 'index']);
+     Route::get('/kayit', [\App\Http\Controllers\Api\UyeController::class, 'form']);
+     Route::post('/register', [\App\Http\Controllers\Api\UyeController::class, 'register']);
+ 
+     Route::middleware([Diyetisyen::class])->group(function () {
+     Route::get('/diyetisyen/odemeler', [\App\Http\Controllers\Api\OdemeController::class, 'index']);
      Route::get('/danisanlar', [\App\Http\Controllers\Api\DanisanController::class, 'index']);
-     Route::get('/besinkategorileri', [\App\Http\Controllers\Api\BesinKategoriController::class, 'index']);
-     Route::get('/besinler', [\App\Http\Controllers\Api\BesinController::class, 'index']);
-     Route::get('/kullanicilar', [\App\Http\Controllers\Api\KullaniciController::class, 'index']);
-     Route::get('/odemeler', [\App\Http\Controllers\Api\OdemeController::class, 'index']);
-     Route::get('/ogunler', [\App\Http\Controllers\Api\OgunController::class, 'index']);
-     Route::get('/oneriler', [\App\Http\Controllers\Api\OneriController::class, 'index']);
-     Route::get('/randevular', [\App\Http\Controllers\Api\RandevuController::class, 'index']);
-     Route::get('/ucretler', [\App\Http\Controllers\Api\UcretController::class, 'index']);
-     Route::get('/roller', [\App\Http\Controllers\Api\RolController::class, 'index']);
-     Route::get('/kaloriHesaplama', [\App\Http\Controllers\Api\KaloriHesaplamaController::class, 'index']);
+     Route::get('/diyetisyen/besinkategorileri', [\App\Http\Controllers\Api\BesinKategoriController::class, 'index']);
+     Route::get('/diyetisyen/besinler', [\App\Http\Controllers\Api\BesinController::class, 'index']); 
+     Route::get('/diyetisyen/ogunler', [\App\Http\Controllers\Api\OgunController::class, 'index']);
+     Route::get('/diyetisyen/oneriler', [\App\Http\Controllers\Api\OneriController::class, 'index']);
+     Route::get('/diyetisyen/randevular', [\App\Http\Controllers\Api\RandevuController::class, 'index']);
+     Route::get('/diyetisyen/ucretler', [\App\Http\Controllers\Api\UcretController::class, 'index']);
+     Route::get('/diyetisyen/kaloriHesaplama', [\App\Http\Controllers\Api\KaloriHesaplamaController::class, 'index']);
+     });
 
+     Route::middleware([Danisan::class])->group(function () {
+     Route::get('/diyetisyenler', [\App\Http\Controllers\Api\Danisan\DanisanDiyetisyenController::class, 'index']);
+     Route::get('/danisan/besinkategorileri', [\App\Http\Controllers\Api\Danisan\DanisanBesinKategoriController::class, 'index']);
+     Route::get('/danisan/besinler', [\App\Http\Controllers\Api\Danisan\DanisanBesinController::class, 'index']);
+     Route::get('/danisan/odemeler', [\App\Http\Controllers\Api\Danisan\DanisanOdemeController::class, 'index']);
+     Route::get('/danisan/ogunler', [\App\Http\Controllers\Api\Danisan\DanisanOgunController::class, 'index']);
+     Route::get('/danisan/oneriler', [\App\Http\Controllers\Api\Danisan\DanisanOneriController::class, 'index']);
+     Route::get('/danisan/randevular', [\App\Http\Controllers\Api\Danisan\DanisanRandevuController::class, 'index']);
+     Route::get('/danisan/ucretler', [\App\Http\Controllers\Api\Danisan\DanisanUcretController::class, 'index']);
+     Route::get('/danisan/kaloriHesaplama', [\App\Http\Controllers\Api\Danisan\DanisanKaloriHesaplamaController::class, 'index']);
+     });
+
+     Route::get('/kullanicilar', [\App\Http\Controllers\Api\KullaniciController::class, 'index']);
+     Route::get('/roller', [\App\Http\Controllers\Api\RolController::class, 'index']);
+
+
+/*
      Route::get('/diyetisyen/{id}', [\App\Http\Controllers\Api\DiyetisyenController::class, 'show']);
      Route::get('/danisan/{id}', [\App\Http\Controllers\Api\DanisanController::class, 'show']);
      Route::get('/besinkategori/{id}', [\App\Http\Controllers\Api\BesinKategoriController::class, 'show']);
@@ -95,7 +116,7 @@ Route::apiResources([
      Route::get('/besin/{id}', [\App\Http\Controllers\Api\BesinController::class, 'show']);
      Route::get('/rol/{id}', [\App\Http\Controllers\Api\RolController::class, 'show']);
      Route::get('/kaloriHesaplama/{id}', [\App\Http\Controllers\Api\KaloriHesaplamaController::class, 'show']);
-
+*/
 
       //POST METHODS//////////////////////////////////////////////////////////////////////////////////////////////////
 

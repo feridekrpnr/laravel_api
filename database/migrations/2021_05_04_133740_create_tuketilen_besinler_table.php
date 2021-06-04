@@ -18,7 +18,7 @@ class CreateTuketilenBesinlerTable extends Migration
             $table->collation = 'utf8mb4_turkish_ci';
             $table->engine = 'InnoDB';
             $table->id();
-            $table->date('tarih');
+            $table->dateTime('tarih')->default(DB::raw('CURRENT_TIMESTAMP'));
 
             $table->unsignedBigInteger('danisan_id');
             $table->foreign('danisan_id')->references('id')->on('danisanlar')->cascadeOnDelete();

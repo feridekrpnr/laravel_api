@@ -26,10 +26,10 @@ class CreateDanisanlar extends Migration
             $table->integer('yas');
             $table->double('danisan_boy')->nullable();
             $table->double('danisan_kilo')->nullable();
-            $table->text('kronik_rahatsizlik',350)->nullable();
-            $table->text('ilac',350)->nullable();
-            $table->string('alkol',5)->nullable();
-            $table->text('disari_yemek',350)->nullable();
+            $table->integer('kronik_rahatsizlik')->nullable();
+            $table->integer('ilac')->nullable();
+            $table->integer('alkol')->nullable();
+            $table->integer('disari_yemek')->nullable();
             $table->integer('gunluk_ogun')->nullable();
             $table->integer('gunluk_su')->nullable();
             $table->integer('hedef_kilo')->nullable();

@@ -18,7 +18,7 @@ class CreateOneriler extends Migration
             $table->collation = 'utf8mb4_turkish_ci';
             $table->engine = 'InnoDB';
             $table->id();
-            $table->dateTime('oneri_tarih');
+            $table->dateTime('oneri_tarih')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->text('oneri_aciklama');
             $table->integer('oneri_kalori');
 
