@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\OneriWithDiyetisyenResource;
+use App\Models\Diyetisyen;
+use App\Models\Danisan;
+use App\Models\Besin;
 use App\Models\Oneri;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -19,7 +22,13 @@ class OneriController extends Controller
     public function index()
     {
         //   return response(Rol::paginate(10), 200);
-        return response()->json(Oneri::all());
+        $oneriler=Oneri::all();
+        foreach($oneriler as $key => $oneri){
+            $oneriler[$key]->diyetisyen_adi=Diyetisyen::find($oneri->diyetisyen_id)->adi;
+            $oneriler[$key]->danisan_adi=Danisan::find($oneri->danisan_id)->adi;
+            $oneriler[$key]->besin_adi=Besin::find($oneri->besin_id)->besin_adi;
+        }
+        return response()->json($oneriler);
     }
 
     /**
