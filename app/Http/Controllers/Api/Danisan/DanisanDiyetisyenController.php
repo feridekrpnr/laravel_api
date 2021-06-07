@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Danisan;
 
 
 use App\Http\Controllers\Controller;
@@ -47,11 +47,12 @@ class DanisanDiyetisyenController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+       /* $validator = Validator::make($request->all(), [
             'mail' => 'required|email|unique:diyetisyenler',
             'adi' =>  'required|string|max:50',
             'parola' =>'required'
     ]);
+    */
         $input = $request->all(); //gelen tüm dataya erişim sağlar
         //veri tabanına kaydetme
         $diyetisyen = new Diyetisyen;

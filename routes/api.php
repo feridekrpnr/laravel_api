@@ -47,13 +47,13 @@ Route::get('/diyetisyenler/eslemeDanisanlarim', [\App\Http\Controllers\Api\Diyet
 Route::get('/diyetisyenler/danisanlarim1', [\App\Http\Controllers\Api\DiyetisyenController::class, 'danisanlarim1']);
 
 
-Route::get('roller',function(){
+/*Route::get('roller',function(){
      return factory(Rol::class, 10)->make();
 });
 Route::get('kullanicilar',function(){
      return factory(Kullanici::class, 10)->make();
 });
-
+*/
 
 //
 
@@ -73,6 +73,7 @@ Route::apiResources([
 ]);
 
      Route::get('/kayit', [\App\Http\Controllers\Api\UyeController::class, 'form']);
+     Route::get('/giris', [\App\Http\Controllers\Api\UyeController::class, 'login']);
      Route::post('/register', [\App\Http\Controllers\Api\UyeController::class, 'register']);
  
      Route::middleware([Diyetisyen::class])->group(function () {

@@ -22,7 +22,7 @@ class CreateKullanicilar extends Migration
             $table->string('email'); //string varchar yapar var mı başka bişey? bide controllerları oluşturduk
             $table->string('token');
             $table->string('password');
-            $table->unsignedBigInteger('rol_id');
+            $table->unsignedBigInteger('rol_id')->nullable();
             $table->foreign('rol_id')->references('id')->on('roller')->cascadeOnDelete()->cascadeOnUpdate();
         });
 

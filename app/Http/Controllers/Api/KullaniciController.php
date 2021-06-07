@@ -29,12 +29,14 @@ class KullaniciController extends Controller
     public function store(Request $request)
 
     {
+        /*
         $validator = Validator::make($request->all(), [
             'mail' => 'required|email|unique:danisanlar',
             'adi' =>  'required|string|max:50',
             'soyad' =>  'required|string|max:50',
             'parola' =>'required'
         ]);
+        */
         $input = $request->all(); //gelen tüm dataya erişim sağlar
         //veri tabanına kaydetme
        $kullanici = new Kullanici;
