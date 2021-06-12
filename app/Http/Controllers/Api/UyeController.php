@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Danisan;
 use App\Models\Diyetisyen;
 use App\Models\Uye;
+use GuzzleHttp\Psr7\Message;
 use Illuminate\Http\Request;
 
 class UyeController extends Controller
@@ -31,7 +32,10 @@ class UyeController extends Controller
             $data['token']=$query->token;
         return response()->json($data) ;
             }
-
+        else{
+            $returnArray['message'] = "Giriş Başarısız";
+        }
+    return response()->json($returnArray);
     }
 }
         public function register(Request $req){
@@ -46,7 +50,9 @@ class UyeController extends Controller
             "password"=> md5($req->password),
             "token"=> md5($req->email)
         ]);
+        
         if($ekle){
+    
          if($req->rol==1){
              Diyetisyen::create([
                  "kullanici_id"=>$ekle->id
@@ -56,6 +62,8 @@ class UyeController extends Controller
                 "kullanici_id"=>$ekle->id
              ]);
          }
+         return response()->json($ekle) ;
+         
         }
 
      }

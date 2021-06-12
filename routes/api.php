@@ -89,6 +89,7 @@ Route::apiResources([
      });
 
      Route::middleware([Danisan::class])->group(function () {
+     Route::get('/danisanlar', [\App\Http\Controllers\Api\Danisan\DanisanDiyetisyenController::class, 'index']);
      Route::get('/diyetisyenler', [\App\Http\Controllers\Api\Danisan\DanisanDiyetisyenController::class, 'index']);
      Route::get('/danisan/besinkategorileri', [\App\Http\Controllers\Api\Danisan\DanisanBesinKategoriController::class, 'index']);
      Route::get('/danisan/besinler', [\App\Http\Controllers\Api\Danisan\DanisanBesinController::class, 'index']);

@@ -18,12 +18,12 @@ class CreateDanisanlar extends Migration
             $table->collation = 'utf8mb4_turkish_ci';
             $table->engine = 'InnoDB';
             $table->id();
-            $table->string('adi', 30);
-            $table->string('soyad', 30);
-            $table->string('tc',11)->unique();
-            $table->string('telefon', 11);
-            $table->smallInteger('cinsiyet');
-            $table->integer('yas');
+            $table->string('adi', 30)->nullable();
+            $table->string('soyad', 30)->nullable();
+            $table->string('tc',11)->unique()->nullable();
+            $table->string('telefon', 11)->nullable();
+            $table->smallInteger('cinsiyet')->nullable();
+            $table->integer('yas')->nullable();
             $table->double('danisan_boy')->nullable();
             $table->double('danisan_kilo')->nullable();
             $table->integer('kronik_rahatsizlik')->nullable();
@@ -38,7 +38,7 @@ class CreateDanisanlar extends Migration
             $table->text('aciklama',350)->nullable();
             $table->unsignedBigInteger('kullanici_id')->unique();
             $table->foreign('kullanici_id')->references('id')->on('kullanicilar')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->unsignedBigInteger('rol_id')->unique();
+            $table->unsignedBigInteger('rol_id')->unique()->nullable();
             $table->foreign('rol_id')->references('id')->on('roller')->cascadeOnDelete()->cascadeOnUpdate();
 
         });
