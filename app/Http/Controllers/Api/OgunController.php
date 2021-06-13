@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Kullanici;
 use App\Models\Ogun;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -28,6 +29,8 @@ class OgunController extends Controller
      */
     public function store(Request $request)
     {
+        $user=Kullanici::where("token",$request->token)->first();
+        $danisan = Ogun::where("kullanici_id",$user->id)->first();
         $input = $request->all(); //gelen tüm dataya erişim sağlar
         //veri tabanına kaydetme
        $ogun = new Ogun;

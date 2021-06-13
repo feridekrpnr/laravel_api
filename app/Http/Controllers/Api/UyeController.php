@@ -11,7 +11,8 @@ use Illuminate\Http\Request;
 
 class UyeController extends Controller
 {
-    public function form(Request $req){
+    public function form(Request $req)
+    {
 
         echo "
         <form action='/api/register' method='POST'>
@@ -19,53 +20,56 @@ class UyeController extends Controller
 <input type='text' name='email' placeholder='email'>
 <input type='password' name='password' placeholder='şifre'>
 <input type='radio' name='rol' value='1'>Diyetisyen  |  <input type='radio' name='rol' value='2'>Danışan
-<input type='hidden' name='_token' value='".csrf_token()."'>
+<input type='hidden' name='_token' value='" . csrf_token() . "'>
 <button>Submit</button>
         </form>
         ";
-
     }
-    public function login(Request $req){
-    if($req->email){
-        $query=Uye::where("email",$req->email)->where("password",md5($req->password))->first();
-        if($query){
-            $data['token']=$query->token;
-        return response()->json($data) ;
+    public function login(Request $req)
+    {
+        if ($req->email) {
+            $query = Uye::where("email", $req->email)->where("password", md5($req->password))->first();
+            if ($query) {
+                $data['token'] = $query->token;
+                $data['giris'] = 1;
+                $data['message'] = "Giriş Başarılı";
+                return response()->json($data);
+            } else {
+                $data['message'] = "Giriş Başarısız";
+                $data['giris'] = 0;
             }
-        else{
-            $returnArray['message'] = "Giriş Başarısız";
+            return response()->json($data);
         }
-    return response()->json($returnArray);
     }
-}
-        public function register(Request $req){
-     if($req->email){
-         $query=Uye::where("email",$req->email)->first();
-         if($query){
-             die("bu email kayıtlı");
-         }
-         $ekle=Uye::create([
-            "email"=>$req->email,
-            "rol"=>$req->rol,
-            "password"=> md5($req->password),
-            "token"=> md5($req->email)
-        ]);
-        
-        if($ekle){
-    
-         if($req->rol==1){
-             Diyetisyen::create([
-                 "kullanici_id"=>$ekle->id
-             ]);
-         }elseif($req->rol==2){
-             Danisan::create([
-                "kullanici_id"=>$ekle->id
-             ]);
-         }
-         return response()->json($ekle) ;
-         
-        }
+    public function register(Request $req)
+    {
+        if ($req->email) {
+            $query = Uye::where("email", $req->email)->first();
+            if ($query) {
+                $data['kayit'] = 0;
+                $data['message'] = "Daha önce kayıt olmuş";
+                return response()->json($data);
+            }
+            $ekle = Uye::create([
+                "email" => $req->email,
+                "rol" => $req->rol,
+                "password" => md5($req->password),
+                "token" => md5($req->email)
+            ]);
 
-     }
+            if ($ekle) {
+
+                if ($req->rol == 1) {
+                    Diyetisyen::create([
+                        "kullanici_id" => $ekle->id
+                    ]);
+                } elseif ($req->rol == 2) {
+                    Danisan::create([
+                        "kullanici_id" => $ekle->id
+                    ]);
+                }
+                return response()->json($ekle);
+            }
+        }
     }
 }

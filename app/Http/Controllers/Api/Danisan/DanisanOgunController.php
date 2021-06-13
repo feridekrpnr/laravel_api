@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Danisan;
 
 use App\Http\Controllers\Controller;
+use App\Models\Kullanici;
 use App\Models\Ogun;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -46,9 +47,10 @@ class DanisanOgunController extends Controller
      * @param  \App\Models\Ogun  $ogun
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        $ogun = Ogun::find($id);
+        $user=Kullanici::where("token",$request->token)->first();
+        $ogun = Ogun::where("kullanici_id",$user->id)->first();
         if($ogun)
             return response()->json($ogun, 200);
         else

@@ -7,10 +7,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\DiyetisyenWithDanisanEslesmeResource;
 use App\Models\Danisan;
 use App\Models\Diyetisyen;
+use App\Models\Kullanici;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Request;
 
-class DanisanController extends Controller
+class DanisanDanisanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -38,21 +39,21 @@ class DanisanController extends Controller
     public function store(Request $request)
 
     {
+    $token=$request->token;
+    $user=Kullanici::where("token",$token)->first();
 
         $input = $request->all(); //gelen tüm dataya erişim sağlar
         //veri tabanına kaydetme
        $danisan = new Danisan;
        $danisan->adi = $request->adi;
        $danisan->soyad = $request->soyad;
-       $danisan->mail = $request->mail;
-       $danisan->parola = $request->parola;
        $danisan->tc = $request->tc;
        $danisan->telefon = $request->telefon;
        $danisan->cinsiyet = $request->cinsiyet;
        $danisan->yas = $request->yas;
        $danisan->danisan_boy = $request->danisan_boy;
        $danisan->danisan_kilo = $request->danisan_kilo;
-       $danisan->kullanici_id = $request->kullanici_id;
+       $danisan->kullanici_id = $user->id;
        $danisan->save();
 
             return response([
@@ -67,9 +68,12 @@ class DanisanController extends Controller
      * @param \App\Models\Danisan $danisan
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        $danisan = Danisan::find($id);
+         $token=$request->token;
+        $user=Kullanici::where("token",$token)->first();
+
+        $danisan = Danisan::find($user->id);
         if($danisan)
             return response()->json($danisan, 200);
         else
@@ -83,20 +87,18 @@ class DanisanController extends Controller
      * @param \App\Models\Danisan $danisan
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Danisan $danisan,$id)
+    public function update(Request $request)
     {
-        $danisan = Danisan::find($id);
+        $user=Kullanici::where("token",$request->token)->first();
+        $danisan = Danisan::where("kullanici_id",$user->id)->first();
         $danisan->adi = $request->adi;
         $danisan->soyad = $request->soyad;
-        $danisan->mail = $request->mail;
-        $danisan->parola = $request->parola;
         $danisan->tc = $request->tc;
         $danisan->telefon = $request->telefon;
         $danisan->cinsiyet = $request->cinsiyet;
         $danisan->yas = $request->yas;
         $danisan->danisan_boy = $request->danisan_boy;
         $danisan->danisan_kilo = $request->danisan_kilo;
-        $danisan->kullanici_id = $request->kullanici_id;
         $danisan->save();
 
             return response([

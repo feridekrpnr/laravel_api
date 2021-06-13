@@ -12,6 +12,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Request;
 use App\Http\Resources\DiyetisyenResource;
 use App\Http\Resources\DiyetisyenCollection;
+use App\Models\Kullanici;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -95,20 +96,18 @@ class DiyetisyenController extends Controller
      * @param \App\Models\Diyetisyen $diyetisyen
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Diyetisyen $diyetisyen,$id)
+    public function update(Request $request)
     {
-        $diyetisyen = Diyetisyen::find($id);
+        $user=Kullanici::where("token",$request->token)->first();
+        $diyetisyen = Diyetisyen::where("kullanici_id",$user->id)->first();
         $diyetisyen->adi = $request->adi;
         $diyetisyen->soyad = $request->soyad;
-        $diyetisyen->mail = $request->mail;
-        $diyetisyen->parola = $request->parola;
         $diyetisyen->tc = $request->tc;
         $diyetisyen->telefon = $request->telefon;
         $diyetisyen->cinsiyet = $request->cinsiyet;
         $diyetisyen->yas = $request->yas;
         $diyetisyen->hakkimda = $request->hakkimda;
         $diyetisyen->puan = $request->puan;
-        $diyetisyen->kullanici_id = $request->kullanici_id;
         $diyetisyen->save();
 
             return response([
