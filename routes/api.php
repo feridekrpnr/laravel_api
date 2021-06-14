@@ -79,6 +79,13 @@ Route::apiResources([
      Route::middleware([Diyetisyen::class])->group(function () {
      Route::get('/diyetisyenler', [\App\Http\Controllers\Api\DiyetisyenController::class, 'index']);
      Route::post('/diyetisyenler/update', [\App\Http\Controllers\Api\DiyetisyenController::class, 'update']);
+    
+     Route::get('/program/list', [\App\Http\Controllers\Api\DiyetisyenProgramController::class, 'list']);
+     Route::get('/program/{id}', [\App\Http\Controllers\Api\DiyetisyenProgramController::class, 'getProgram']);
+     Route::post('/program/insert', [\App\Http\Controllers\Api\DiyetisyenProgramController::class, 'insert']);     
+     Route::post('/program/update/{id}', [\App\Http\Controllers\Api\DiyetisyenController::class, 'update']);
+     Route::post('/program/delete/{id}', [\App\Http\Controllers\Api\DiyetisyenProgramController::class, 'delete']);
+
      Route::get('/diyetisyen/odemeler', [\App\Http\Controllers\Api\OdemeController::class, 'index']);
      Route::get('/danisanlar', [\App\Http\Controllers\Api\DanisanController::class, 'index']);
      Route::get('/diyetisyen/besinkategorileri', [\App\Http\Controllers\Api\BesinKategoriController::class, 'index']);
@@ -86,7 +93,7 @@ Route::apiResources([
      Route::get('/diyetisyen/ogunler', [\App\Http\Controllers\Api\OgunController::class, 'index']);
      Route::get('/diyetisyen/oneriler', [\App\Http\Controllers\Api\OneriController::class, 'index']);
      Route::get('/diyetisyen/randevular', [\App\Http\Controllers\Api\RandevuController::class, 'index']);
-     Route::post('/diyetisyen/randevular/insert', [\App\Http\Controllers\Api\RandevuController::class, 'store']);
+     Route::get('/diyetisyen/randevular/insert', [\App\Http\Controllers\Api\RandevuController::class, 'store']);
      Route::get('/diyetisyen/ucretler', [\App\Http\Controllers\Api\UcretController::class, 'index']);
      Route::get('/diyetisyen/kaloriHesaplama', [\App\Http\Controllers\Api\KaloriHesaplamaController::class, 'index']);
      });
@@ -94,6 +101,7 @@ Route::apiResources([
      Route::middleware([Danisan::class])->group(function () {
      Route::get('/danisanlar', [\App\Http\Controllers\Api\Danisan\DanisanDanisanController::class, 'index']);
      Route::post('/danisanlar/update', [\App\Http\Controllers\Api\Danisan\DanisanDanisanController::class, 'update']);
+     Route::get('/danisanlar/show/{id}', [\App\Http\Controllers\Api\Danisan\DanisanDanisanController::class, 'show']);
      Route::get('/diyetisyenler', [\App\Http\Controllers\Api\Danisan\DanisanDiyetisyenController::class, 'index']);
      Route::get('/danisan/besinkategorileri', [\App\Http\Controllers\Api\Danisan\DanisanBesinKategoriController::class, 'index']);
      Route::get('/danisan/besinler', [\App\Http\Controllers\Api\Danisan\DanisanBesinController::class, 'index']);

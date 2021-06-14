@@ -64,6 +64,7 @@ class DiyetisyenController extends Controller
         $diyetisyen->cinsiyet = $request->cinsiyet;
         $diyetisyen->yas = $request->yas;
         $diyetisyen->hakkimda = $request->hakkimda;
+        $diyetisyen->kategori = $request->kategori;
         $diyetisyen->puan = $request->puan;
         $diyetisyen->kullanici_id = $request->kullanici_id;
         $diyetisyen->save();
@@ -107,6 +108,7 @@ class DiyetisyenController extends Controller
         $diyetisyen->cinsiyet = $request->cinsiyet;
         $diyetisyen->yas = $request->yas;
         $diyetisyen->hakkimda = $request->hakkimda;
+        $diyetisyen->kategori = $request->kategori;
         $diyetisyen->puan = $request->puan;
         $diyetisyen->save();
 

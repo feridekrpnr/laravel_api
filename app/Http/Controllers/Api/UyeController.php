@@ -31,6 +31,7 @@ class UyeController extends Controller
             $query = Uye::where("email", $req->email)->where("password", md5($req->password))->first();
             if ($query) {
                 $data['token'] = $query->token;
+                $data['rol'] = $query->rol;
                 $data['giris'] = 1;
                 $data['message'] = "Giriş Başarılı";
                 return response()->json($data);

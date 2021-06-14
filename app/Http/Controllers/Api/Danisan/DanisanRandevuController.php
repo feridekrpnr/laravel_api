@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Diyetisyen;
 use App\Models\Danisan;
+use App\Models\Kullanici;
 use App\Models\Randevu;
 use Illuminate\Http\Request;
 
@@ -35,12 +36,14 @@ class DanisanRandevuController extends Controller
      */
     public function store(Request $request)
     {
+        $user=Kullanici::where("token",$request->token)->first();
+        $danisan = Danisan::where("kullanici_id",$user->id)->first();
         $input = $request->all(); //gelen tüm dataya erişim sağlar
         //veri tabanına kaydetme
        $randevu = new Randevu;
        $randevu->randevu_tarih = $request->randevu_tarih;
        $randevu->randevu_saat = $request->randevu_saat;
-       $randevu->danisan_id = $request->danisan_id;
+       $randevu->danisan_id = $danisan->id;
        $randevu->diyetisyen_id = $request->diyetisyen_id;
        $randevu->save();
 

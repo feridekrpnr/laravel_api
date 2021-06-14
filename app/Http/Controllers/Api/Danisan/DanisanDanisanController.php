@@ -53,6 +53,16 @@ class DanisanDanisanController extends Controller
        $danisan->yas = $request->yas;
        $danisan->danisan_boy = $request->danisan_boy;
        $danisan->danisan_kilo = $request->danisan_kilo;
+       $danisan->kronik_rahatsizlik  = $request->kronik_rahatsizlik ;
+        $danisan->ilac = $request->ilac;
+        $danisan->alkol = $request->alkol;
+        $danisan->disari_yemek = $request->disari_yemek;
+        $danisan->gunluk_ogun = $request->gunluk_ogun;
+        $danisan->gunluk_su = $request->gunluk_su;
+        $danisan->hedef_kilo = $request->hedef_kilo;
+        $danisan->sevilen_besin = $request->sevilen_besin;
+        $danisan->sevilmeyen_besin = $request->sevilmeyen_besin;
+        $danisan->aciklama = $request->aciklama;
        $danisan->kullanici_id = $user->id;
        $danisan->save();
 
@@ -70,7 +80,7 @@ class DanisanDanisanController extends Controller
      */
     public function show(Request $request)
     {
-         $token=$request->token;
+        $token=$request->token;
         $user=Kullanici::where("token",$token)->first();
 
         $danisan = Danisan::find($user->id);
@@ -99,6 +109,16 @@ class DanisanDanisanController extends Controller
         $danisan->yas = $request->yas;
         $danisan->danisan_boy = $request->danisan_boy;
         $danisan->danisan_kilo = $request->danisan_kilo;
+        $danisan->kronik_rahatsizlik  = $request->kronik_rahatsizlik ;
+        $danisan->ilac = $request->ilac;
+        $danisan->alkol = $request->alkol;
+        $danisan->disari_yemek = $request->disari_yemek;
+        $danisan->gunluk_ogun = $request->gunluk_ogun;
+        $danisan->gunluk_su = $request->gunluk_su;
+        $danisan->hedef_kilo = $request->hedef_kilo;
+        $danisan->sevilen_besin = $request->sevilen_besin;
+        $danisan->sevilmeyen_besin = $request->sevilmeyen_besin;
+        $danisan->aciklama = $request->aciklama;
         $danisan->save();
 
             return response([
