@@ -19,9 +19,12 @@ class CreateBesinlerTable extends Migration
             $table->engine = 'InnoDB';
             $table->id();
             $table->string('besin_adi',70);
-            $table->integer('besin_kalori');
-            $table->string('besin_birimi',30);
-            $table->integer('adet')->nullable();
+            $table->string('besin_olcu',30)->nullable();
+            $table->integer('besin_protein')->nullable();
+            $table->integer('besin_seker')->nullable();
+            $table->integer('besin_yag')->nullable();
+            $table->integer('besin_kolestrol')->nullable();
+            $table->integer('besin_kalori')->nullable();
             $table->unsignedBigInteger('besin_kategori_id');
             $table->foreign('besin_kategori_id')->references('id')->on('besin_kategori')->cascadeOnDelete()->cascadeOnUpdate();
 
