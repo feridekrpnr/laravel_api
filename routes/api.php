@@ -99,18 +99,32 @@ Route::apiResources([
      });
 
      Route::middleware([Danisan::class])->group(function () {
+     
+     Route::get('/danisanlar/program/list', [\App\Http\Controllers\Api\Danisan\DanisanProgramController::class, 'list']);
+     Route::get('/danisanlar/program/{id}', [\App\Http\Controllers\Api\Danisan\DanisanProgramController::class, 'getProgram']);
+     
      Route::get('/danisanlar', [\App\Http\Controllers\Api\Danisan\DanisanDanisanController::class, 'index']);
      Route::post('/danisanlar/update', [\App\Http\Controllers\Api\Danisan\DanisanDanisanController::class, 'update']);
      Route::get('/danisanlar/show/{id}', [\App\Http\Controllers\Api\Danisan\DanisanDanisanController::class, 'show']);
+   
      Route::get('/diyetisyenler', [\App\Http\Controllers\Api\Danisan\DanisanDiyetisyenController::class, 'index']);
+   
      Route::get('/danisan/besinkategorileri', [\App\Http\Controllers\Api\Danisan\DanisanBesinKategoriController::class, 'index']);
      Route::get('/danisan/besinler', [\App\Http\Controllers\Api\Danisan\DanisanBesinController::class, 'index']);
      Route::get('/danisan/odemeler', [\App\Http\Controllers\Api\Danisan\DanisanOdemeController::class, 'index']);
+     
      Route::get('/danisan/ogunler', [\App\Http\Controllers\Api\Danisan\DanisanOgunController::class, 'index']);
      Route::post('/danisan/ogunler/insert', [\App\Http\Controllers\Api\Danisan\DanisanOgunController::class, 'store']);
+     
      Route::get('/danisan/oneriler', [\App\Http\Controllers\Api\Danisan\DanisanOneriController::class, 'index']);
-     Route::get('/danisan/randevular', [\App\Http\Controllers\Api\Danisan\DanisanRandevuController::class, 'index']);
+     
+     Route::get('/danisan/randevu', [\App\Http\Controllers\Api\Danisan\DanisanRandevuController::class, 'listDiyetisyen']);
+     Route::get('/danisan/randevu_olustur/{diyetisyen_id}', [\App\Http\Controllers\Api\Danisan\DanisanRandevuController::class, 'index']);
+     Route::get('/danisan/randevular', [\App\Http\Controllers\Api\Danisan\DanisanRandevuController::class, 'randevularim']);
+     Route::post('/danisan/randevu/insert', [\App\Http\Controllers\Api\Danisan\DanisanRandevuController::class, 'store']);
+     
      Route::get('/danisan/ucretler', [\App\Http\Controllers\Api\Danisan\DanisanUcretController::class, 'index']);
+     
      Route::get('/danisan/kaloriHesaplama', [\App\Http\Controllers\Api\Danisan\DanisanKaloriHesaplamaController::class, 'index']);
      });
 

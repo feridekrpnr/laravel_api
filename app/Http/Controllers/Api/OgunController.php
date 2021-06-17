@@ -49,9 +49,10 @@ class OgunController extends Controller
      * @param  \App\Models\Ogun  $ogun
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        $ogun = Ogun::find($id);
+    public function show(Request $request)
+    {   $user=Kullanici::where("token",$request->token)->first();
+        $danisan = Ogun::where("kullanici_id",$user->id)->first();
+        $ogun = Ogun::find($request->id);
         if($ogun)
             return response()->json($ogun, 200);
         else

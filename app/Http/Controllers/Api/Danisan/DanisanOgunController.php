@@ -29,6 +29,8 @@ class DanisanOgunController extends Controller
      */
     public function store(Request $request)
     {
+        $user=Kullanici::where("token",$request->token)->first();
+        $danisan = Ogun::where("kullanici_id",$user->id)->first();
         $input = $request->all(); //gelen tüm dataya erişim sağlar
         //veri tabanına kaydetme
        $ogun = new Ogun;
@@ -36,7 +38,7 @@ class DanisanOgunController extends Controller
        $ogun->save();
 
             return response([
-                'data' => $ogun, 
+                'data' => $ogun,
                 'message'=> 'ogun oluşturuldu'
             ],201);
     }

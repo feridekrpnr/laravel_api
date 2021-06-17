@@ -13,37 +13,7 @@ class Danisan extends Model
     protected $guarded=[];  //tabloların içini doldurmak için
     protected $table="danisanlar";
     public $timestamps =  false;
-  /* /**
-     * bir daha aç
-     * The attributes that are mass assignable.
-     *
-     * @var array
 
-    protected $fillable = [
-        'adi',
-        'mail',
-        'parola',
-    ];
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-
-    protected $hidden = [
-        'parola',
-        'remember_token',
-    ];
-
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
-*/
     public function getKullanici()
     {
         return $this->hasOne(Kullanici::class,'kullanici_id','kullanicilar');

@@ -12,6 +12,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Request;
 use App\Http\Resources\DiyetisyenResource;
 use App\Http\Resources\DiyetisyenCollection;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Kullanici;
 use Illuminate\Support\Facades\DB;
 
@@ -66,6 +67,7 @@ class DiyetisyenController extends Controller
         $diyetisyen->hakkimda = $request->hakkimda;
         $diyetisyen->kategori = $request->kategori;
         $diyetisyen->puan = $request->puan;
+        $diyetisyen->image = Storage::putFile('images', $request->file('image'));
         $diyetisyen->kullanici_id = $request->kullanici_id;
         $diyetisyen->save();
 
@@ -110,6 +112,9 @@ class DiyetisyenController extends Controller
         $diyetisyen->hakkimda = $request->hakkimda;
         $diyetisyen->kategori = $request->kategori;
         $diyetisyen->puan = $request->puan;
+        if($diyetisyen->image){
+            $diyetisyen->image = Storage::putFile('images', $request->file('image'));
+       }
         $diyetisyen->save();
 
             return response([

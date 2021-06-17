@@ -56,8 +56,9 @@ class UyeController extends Controller
                 "rol" => $req->rol,
                 "password" => md5($req->password),
                 "token" => md5($req->email)
+                
             ]);
-
+           
             if ($ekle) {
 
                 if ($req->rol == 1) {
@@ -69,7 +70,11 @@ class UyeController extends Controller
                         "kullanici_id" => $ekle->id
                     ]);
                 }
-                return response()->json($ekle);
+                if ($ekle) {
+                    $ekle['kayit'] = 1;
+                    $ekle['message'] = "Kayıt başarılı";
+                    return response()->json($ekle);
+                }
             }
         }
     }

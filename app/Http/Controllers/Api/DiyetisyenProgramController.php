@@ -116,10 +116,10 @@ class DiyetisyenProgramController extends Controller
             ],200);
     }
 
-public function delete(Program $odeme,$id)
+public function delete(Program $program,$id)
     {
-        $odeme = Program::find($id);
-        $odeme->delete();
+        $program = Program::find($id);
+        $program->delete();
 
         return response([
             'message'=> 'Program silindi'

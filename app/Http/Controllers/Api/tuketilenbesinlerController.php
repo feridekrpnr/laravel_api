@@ -81,9 +81,9 @@ class tuketilenbesinlerController extends Controller
      * @param  \App\Models\TuketilenBesinler  $tuketilenBesinler
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TuketilenBesinler $tuketilenBesinler,$id)
+    public function destroy(Request $request)
     {
-        $tuketilenBesin = tuketilenbesinlerController::find($id);
+        $tuketilenBesin = TuketilenBesinler::find($request->id);
         $tuketilenBesin->delete();
 
         return response([

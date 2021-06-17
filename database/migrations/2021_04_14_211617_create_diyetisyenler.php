@@ -27,6 +27,7 @@ class CreateDiyetisyenler extends Migration
             $table->text('hakkimda',350)->nullable();
             $table->text('kategori',350)->nullable();
             $table->double('puan',30)->nullable();
+            $table->string('image',75)->nullable();
             $table->unsignedBigInteger('kullanici_id')->unique();
             $table->foreign('kullanici_id')->references('id')->on('kullanicilar')->cascadeOnDelete()->cascadeOnUpdate();
             $table->unsignedBigInteger('rol_id')->unique()->nullable();

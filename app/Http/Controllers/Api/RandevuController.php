@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Diyetisyen;
 use App\Models\Danisan;
+use App\Models\Kullanici;
 use App\Models\Randevu;
 use Illuminate\Http\Request;
 
@@ -15,14 +16,15 @@ class RandevuController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //   return response(Rol::paginate(10), 200);
-        $randevular=Randevu::all();
+        $user=Kullanici::where("token",$request->token)->first();
+        $diyetisyen = Diyetisyen::where("kullanici_id",$user->id)->first();
+        $randevular=Randevu::where("diyetisyen_id",$diyetisyen->id)->get();
         foreach($randevular as $key => $randevu){
             $randevular[$key]->diyetisyen_adi=Diyetisyen::find($randevu->diyetisyen_id)->adi;
             $randevular[$key]->danisan_adi=Danisan::find($randevu->danisan_id)->adi;
-            
         }
         return response()->json($randevular);
     }
@@ -35,6 +37,8 @@ class RandevuController extends Controller
      */
     public function store(Request $request)
     {
+
+        
         $input = $request->all(); //gelen tüm dataya erişim sağlar
         //veri tabanına kaydetme
        $randevu = new Randevu;
