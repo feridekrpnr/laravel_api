@@ -79,12 +79,21 @@ Route::apiResources([
      Route::middleware([Diyetisyen::class])->group(function () {
      Route::get('/diyetisyenler', [\App\Http\Controllers\Api\DiyetisyenController::class, 'index']);
      Route::post('/diyetisyenler/update', [\App\Http\Controllers\Api\DiyetisyenController::class, 'update']);
-    
+     Route::get('/diyetisyenler/show', [\App\Http\Controllers\Api\DiyetisyenController::class, 'show']);
+   
      Route::get('/program/list', [\App\Http\Controllers\Api\DiyetisyenProgramController::class, 'list']);
      Route::get('/program/{id}', [\App\Http\Controllers\Api\DiyetisyenProgramController::class, 'getProgram']);
      Route::post('/program/insert', [\App\Http\Controllers\Api\DiyetisyenProgramController::class, 'insert']);     
      Route::post('/program/update/{id}', [\App\Http\Controllers\Api\DiyetisyenController::class, 'update']);
      Route::post('/program/delete/{id}', [\App\Http\Controllers\Api\DiyetisyenProgramController::class, 'delete']);
+
+     Route::get('/saat/list', [\App\Http\Controllers\Api\SaatController::class, 'list']);
+     Route::get('/saat/{id}', [\App\Http\Controllers\Api\SaatController::class, 'getSaat']);
+     Route::post('/saat/insert', [\App\Http\Controllers\Api\SaatController::class, 'insert']);     
+    
+     Route::get('/diyetisyen/randevular', [\App\Http\Controllers\Api\RandevuController::class, 'index']);
+     Route::get('/diyetisyen/randevular/insert', [\App\Http\Controllers\Api\RandevuController::class, 'store']);
+     
 
      Route::get('/diyetisyen/odemeler', [\App\Http\Controllers\Api\OdemeController::class, 'index']);
      Route::get('/danisanlar', [\App\Http\Controllers\Api\DanisanController::class, 'index']);
@@ -92,9 +101,7 @@ Route::apiResources([
      Route::get('/diyetisyen/besinler', [\App\Http\Controllers\Api\BesinController::class, 'index']); 
      Route::get('/diyetisyen/ogunler', [\App\Http\Controllers\Api\OgunController::class, 'index']);
      Route::get('/diyetisyen/oneriler', [\App\Http\Controllers\Api\OneriController::class, 'index']);
-     Route::get('/diyetisyen/randevular', [\App\Http\Controllers\Api\RandevuController::class, 'index']);
-     Route::get('/diyetisyen/randevular/insert', [\App\Http\Controllers\Api\RandevuController::class, 'store']);
-     Route::get('/diyetisyen/ucretler', [\App\Http\Controllers\Api\UcretController::class, 'index']);
+    Route::get('/diyetisyen/ucretler', [\App\Http\Controllers\Api\UcretController::class, 'index']);
      Route::get('/diyetisyen/kaloriHesaplama', [\App\Http\Controllers\Api\KaloriHesaplamaController::class, 'index']);
      });
 
@@ -115,13 +122,19 @@ Route::apiResources([
      
      Route::get('/danisan/ogunler', [\App\Http\Controllers\Api\Danisan\DanisanOgunController::class, 'index']);
      Route::post('/danisan/ogunler/insert', [\App\Http\Controllers\Api\Danisan\DanisanOgunController::class, 'store']);
-     
      Route::get('/danisan/oneriler', [\App\Http\Controllers\Api\Danisan\DanisanOneriController::class, 'index']);
      
+     Route::get('/danisan/saat/list', [\App\Http\Controllers\Api\Danisan\DanisanSaatController::class, 'list']);
+     Route::get('/danisan/saat/{diyetisyen_id}', [\App\Http\Controllers\Api\Danisan\DanisanSaatController::class, 'getSaat']);
+     
+
      Route::get('/danisan/randevu', [\App\Http\Controllers\Api\Danisan\DanisanRandevuController::class, 'listDiyetisyen']);
      Route::get('/danisan/randevu_olustur/{diyetisyen_id}', [\App\Http\Controllers\Api\Danisan\DanisanRandevuController::class, 'index']);
      Route::get('/danisan/randevular', [\App\Http\Controllers\Api\Danisan\DanisanRandevuController::class, 'randevularim']);
      Route::post('/danisan/randevu/insert', [\App\Http\Controllers\Api\Danisan\DanisanRandevuController::class, 'store']);
+     
+     Route::get('/danisan/randevular', [\App\Http\Controllers\Api\Danisan\DanisanRandevuController::class, 'randevularim']);
+     Route::post('/danisan/tuketilenBesinler/insert', [\App\Http\Controllers\Api\Danisan\DanisantuketilenbesinlerController::class, 'store']);
      
      Route::get('/danisan/ucretler', [\App\Http\Controllers\Api\Danisan\DanisanUcretController::class, 'index']);
      

@@ -42,10 +42,11 @@ class RandevuController extends Controller
         $input = $request->all(); //gelen tüm dataya erişim sağlar
         //veri tabanına kaydetme
        $randevu = new Randevu;
-       $randevu->randevu_tarih = $request->randevu_tarih;
-       $randevu->randevu_saat = $request->randevu_saat;
+       $randevu->tarih = $request->tarih;
+       $randevu->goruldu = $request->goruldu;
        $randevu->danisan_id = $request->danisan_id;
        $randevu->diyetisyen_id = $request->diyetisyen_id;
+       $randevu->saat_id = $request->saat_id;
        $randevu->save();
 
        return response([
@@ -79,10 +80,11 @@ class RandevuController extends Controller
     public function update(Request $request, Randevu $randevu,$id)
     {
         $randevu = Randevu::find($id);
-        $randevu->randevu_tarih = $request->randevu_tarih;
-        $randevu->randevu_saat = $request->randevu_saat;
+        $randevu->tarih = $request->tarih;
+        $randevu->goruldu = $request->goruldu;
         $randevu->danisan_id = $request->danisan_id;
         $randevu->diyetisyen_id = $request->diyetisyen_id;
+        $randevu->saat_id = $request->saat_id;
         $randevu->save();
 
         return response([

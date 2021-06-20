@@ -1,11 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Danisan;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\BesinlerWithTüketilenBesinlerResource;
 use App\Http\Resources\KaloriHesaplamaWithTüketilenBesinlerResource;
+use App\Models\Besin;
+use App\Models\Danisan;
 use App\Models\KaloriHesaplama;
+use App\Models\Kullanici;
+use App\Models\Ogun;
 use App\Models\TuketilenBesinler;
 use Illuminate\Http\Request;
 
@@ -29,16 +33,50 @@ class DanisantuketilenbesinlerController extends Controller
      */
     public function store(Request $request)
     {
-        $tuketilenBesin = $request->all(); //gelen tüm dataya erişim sağlar
-        //veri tabanına kaydetme
+        $token=$request->token;
+        $user=Kullanici::where("token",$token)->first();
+       
         $tuketilenBesin = new TuketilenBesinler();
         $tuketilenBesin->tarih = $request->tarih;
+        $tuketilenBesin->kalori = $request->kalori;
+        $tuketilenBesin->danisan_id = $user->id;
+        $tuketilenBesin->ogun_id = $request->ogun_id;
+        $tuketilenBesin->besin_id = $request->besin_id;
         $tuketilenBesin->save();
 
         return response([
             'data' => $tuketilenBesin,
             'message'=> '$tuketilenBesin oluşturuldu'
         ],201);
+    }
+    public function list(Request $request)
+    {
+        $user=Kullanici::where("token",$request->token)->first();
+        $danisan = Danisan::where("kullanici_id",$user->id)->first();
+        $tuketilenBesinler = TuketilenBesinler::where("danisan_id",$danisan->id)->get();
+
+        if($tuketilenBesinler->first()){
+            foreach($tuketilenBesinler as $key => $program){
+                $danisan=Danisan::find($program->danisan_id);
+                $ogun=Ogun::find($program->ogun_id);
+                $besin=Besin::find($program->besin_id);
+                if($danisan){
+                    $tuketilenBesinler[$key]->danisan=$danisan->adi;
+                }
+                
+                if($ogun){
+                    $tuketilenBesinler[$key]->ogun=$ogun->ogun_adi;
+                }
+                if($besin){
+                    $tuketilenBesinler[$key]->besin=$besin->besin_adi;
+                }
+                
+        
+            }
+                return response()->json($tuketilenBesinler, 200);
+        }else{
+            return response(['message'=> 'Program bulunamadi'],404);
+        }
     }
 
     /**
@@ -83,7 +121,7 @@ class DanisantuketilenbesinlerController extends Controller
      */
     public function destroy(TuketilenBesinler $tuketilenBesinler,$id)
     {
-        $tuketilenBesin = tuketilenbesinlerController::find($id);
+        $tuketilenBesin = Tuketilenbesinler::find($id);
         $tuketilenBesin->delete();
 
         return response([

@@ -9,6 +9,6 @@ class Saat extends Model
 {
     use HasFactory;
     protected $guarded=[];  //tabloların içini doldurmak için
-    protected $table="saatler";
+    protected $table="dytrandevu";
     public $timestamps =  false;
 }

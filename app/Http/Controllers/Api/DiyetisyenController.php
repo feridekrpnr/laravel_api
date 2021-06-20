@@ -83,15 +83,17 @@ class DiyetisyenController extends Controller
      * @param \App\Models\Diyetisyen $diyetisyen
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        $diyetisyen = Diyetisyen::find($id);
+        $token=$request->token;
+        $user=Kullanici::where("token",$token)->first();
+
+        $diyetisyen = Diyetisyen::find($user->id);
         if($diyetisyen)
             return response()->json($diyetisyen, 200);
         else
             return response(['message'=> 'Diyetisyen bulunamadi'],404);
     }
-
     /**
      * Update the specified resource in storage.
      *

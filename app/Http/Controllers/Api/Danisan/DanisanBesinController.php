@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Besin;
 use Illuminate\Http\Request;
 
-class DanisanBesinController extends Controller
+class BesinController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,8 +34,12 @@ class DanisanBesinController extends Controller
         //veri tabanına kaydetme
         $besin = new Besin;
         $besin->besin_adi = $request->besin_adi;
+        $besin->besin_olcu = $request->besin_olcu;
+        $besin->besin_protein = $request->besin_protein;
+        $besin->besin_seker = $request->besin_seker;
+        $besin->besin_yag = $request->besin_yag;
+        $besin->besin_kolestrol = $request->besin_kolestrol;
         $besin->besin_kalori = $request->besin_kalori;
-        $besin->besin_birimi = $request->besin_birimi;
         $besin->besin_kategori_id = $request->besin_kategori_id;
         $besin->save();
 
@@ -74,9 +78,14 @@ class DanisanBesinController extends Controller
         //$besin->update($input);
         $besin = Besin::find($id);
         $besin->besin_adi = $request->besin_adi;
+        $besin->besin_olcu = $request->besin_olcu;
+        $besin->besin_protein = $request->besin_protein;
+        $besin->besin_seker = $request->besin_seker;
+        $besin->besin_yag = $request->besin_yag;
+        $besin->besin_kolestrol = $request->besin_kolestrol;
         $besin->besin_kalori = $request->besin_kalori;
-        $besin->besin_birimi = $request->besin_birimi;
         $besin->besin_kategori_id = $request->besin_kategori_id;
+       
         $besin->save();
 
         return response([
