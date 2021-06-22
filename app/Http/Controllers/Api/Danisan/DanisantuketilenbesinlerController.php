@@ -24,6 +24,11 @@ class DanisantuketilenbesinlerController extends Controller
     {
         return response()->json(TuketilenBesinler::all());
     }
+    public function listBesin(Request $request)
+    {
+        $data['besinler'] = Besin::all();
+        return response()->json($data);
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -32,14 +37,13 @@ class DanisantuketilenbesinlerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        $token=$request->token;
-        $user=Kullanici::where("token",$token)->first();
+    { $user = Kullanici::where("token", $request->token)->first();
+    $danisan = Danisan::where("kullanici_id", $user->id)->first();
        
         $tuketilenBesin = new TuketilenBesinler();
         $tuketilenBesin->tarih = $request->tarih;
         $tuketilenBesin->kalori = $request->kalori;
-        $tuketilenBesin->danisan_id = $user->id;
+        $tuketilenBesin->danisan_id = $danisan->id;
         $tuketilenBesin->ogun_id = $request->ogun_id;
         $tuketilenBesin->besin_id = $request->besin_id;
         $tuketilenBesin->save();
@@ -61,14 +65,13 @@ class DanisantuketilenbesinlerController extends Controller
                 $ogun=Ogun::find($program->ogun_id);
                 $besin=Besin::find($program->besin_id);
                 if($danisan){
-                    $tuketilenBesinler[$key]->danisan=$danisan->adi;
+                    $tuketilenBesinler[$key]->danisan_adi=$danisan->adi;
                 }
-                
                 if($ogun){
-                    $tuketilenBesinler[$key]->ogun=$ogun->ogun_adi;
+                    $tuketilenBesinler[$key]->ogun_adi=$ogun->ogun_adı;
                 }
                 if($besin){
-                    $tuketilenBesinler[$key]->besin=$besin->besin_adi;
+                    $tuketilenBesinler[$key]->besin_adi=$besin->besin_adi;
                 }
                 
         

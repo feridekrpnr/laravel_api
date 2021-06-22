@@ -18,7 +18,7 @@ class CreatedytrandevuTable extends Migration
             $table->collation = 'utf8mb4_turkish_ci';
             $table->engine = 'InnoDB';
             $table->id();
-            $table->string('name',70)->nullable();
+            $table->string('saat',70)->nullable();
             $table->string('tarih',70)->nullable();
             $table->unsignedBigInteger('diyetisyen_id')->nullable();
             $table->foreign('diyetisyen_id')->references('id')->on('diyetisyenler')->cascadeOnDelete()->cascadeOnUpdate();

@@ -54,14 +54,14 @@ class SaatController extends Controller
        $saat = new Saat();
      
        $saat->name = $request->name;
-       $saat->tarih = $request->tarih;
-       $saat->diyetisyen_id = $diyetisyen->id;
+       
+      
       
        $saat->save();
 
             return response([
                 'data' => $saat,
-                'message'=> 'Program oluşturuldu'
+                'message'=> 'Saat oluşturuldu'
             ],201);
     }
 }

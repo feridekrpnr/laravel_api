@@ -1,13 +1,51 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Danisan;
 
 use App\Http\Controllers\Controller;
+use App\Models\Diyetisyen;
 use App\Models\Ucret;
 use Illuminate\Http\Request;
 
 class DanisanUcretController extends Controller
 {
+    public function list(Request $request)
+    {
+        $diyetisyen=Diyetisyen::find($request->diyetisyen_id);
+
+        $ucretler = Ucret::where("diyetisyen_id",$request->diyetisyen_id)->get();
+
+        if($ucretler->first()){
+            foreach($ucretler as $key => $program){
+                $diyetisyen=Diyetisyen::find($program->diyetisyen_id);
+               
+                if($diyetisyen){
+                    $ucretler[$key]->diyetisyen_adi=$diyetisyen->adi;
+                }
+               
+                
+        
+            }
+                return response()->json($ucretler, 200);
+        }else{
+            return response(['message'=> 'Ucret bulunamadi'],404);
+        }
+    }
+    public function getUcret(Request $request)
+    {
+        $diyetisyen=Diyetisyen::find($request->diyetisyen_id);
+        $ucret = Ucret::where("diyetisyen_id",$request->diyetisyen_id)->first();
+        if($ucret){
+                
+                if($diyetisyen){
+                    $ucret->diyetisyen=$diyetisyen->adi;
+                }
+                
+                return response()->json($ucret, 200);
+        }else{
+            return response(['message'=> 'Ucret bulunamadi'],404);
+        }
+    }
     /**
      * Display a listing of the resource.
      *

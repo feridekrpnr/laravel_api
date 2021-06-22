@@ -48,13 +48,7 @@ class DiyetisyenController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {/*
-        $validator = Validator::make($request->all(), [
-            'mail' => 'required|email|unique:diyetisyenler',
-            'adi' =>  'required|string|max:50',
-            'parola' =>'required'
-    ]);
-    */
+    {
         $input = $request->all(); //gelen tüm dataya erişim sağlar
         //veri tabanına kaydetme
         $diyetisyen = new Diyetisyen;
@@ -67,7 +61,7 @@ class DiyetisyenController extends Controller
         $diyetisyen->hakkimda = $request->hakkimda;
         $diyetisyen->kategori = $request->kategori;
         $diyetisyen->puan = $request->puan;
-        $diyetisyen->image = Storage::putFile('images', $request->file('image'));
+        $diyetisyen->image = $request->image;
         $diyetisyen->kullanici_id = $request->kullanici_id;
         $diyetisyen->save();
 
@@ -114,9 +108,7 @@ class DiyetisyenController extends Controller
         $diyetisyen->hakkimda = $request->hakkimda;
         $diyetisyen->kategori = $request->kategori;
         $diyetisyen->puan = $request->puan;
-        if($diyetisyen->image){
-            $diyetisyen->image = Storage::putFile('images', $request->file('image'));
-       }
+        $diyetisyen->image = $request->image;
         $diyetisyen->save();
 
             return response([

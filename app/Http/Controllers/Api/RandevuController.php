@@ -46,15 +46,33 @@ class RandevuController extends Controller
        $randevu->goruldu = $request->goruldu;
        $randevu->danisan_id = $request->danisan_id;
        $randevu->diyetisyen_id = $request->diyetisyen_id;
-       $randevu->saat_id = $request->saat_id;
+       $randevu->saat= $request->saat;
        $randevu->save();
 
        return response([
         'data' => $randevu,
-        'message'=> 'oneri oluşturuldu'
+        'message'=> 'Randevu oluşturuldu'
     ],201);
     }
+    public function offdays(Request $request)
+    {
+        $user = Kullanici::where("token", $request->token)->first();
+        $diyetisyen = Diyetisyen::where("kullanici_id", $user->id)->first();
+        $input = $request->all(); //gelen tüm dataya erişim sağlar
+        //veri tabanına kaydetme
+        $randevu = new Randevu;
+        
+            $randevu->tarih = $request->tarih;
+            $randevu->saat = $request->saat;
+           // $randevu->off = $request->off; //off 1 ise müsait değil
+            $randevu->diyetisyen_id = $diyetisyen->id;
+            $randevu->save();
+        
 
+        return response([
+            'message' => 'randevu oluşturuldu'
+        ], 201);
+    }
     /**
      * Display the specified resource.
      *
@@ -84,7 +102,7 @@ class RandevuController extends Controller
         $randevu->goruldu = $request->goruldu;
         $randevu->danisan_id = $request->danisan_id;
         $randevu->diyetisyen_id = $request->diyetisyen_id;
-        $randevu->saat_id = $request->saat_id;
+        $randevu->saat = $request->saat;
         $randevu->save();
 
         return response([

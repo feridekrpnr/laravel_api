@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Middleware\Diyetisyen;
+use App\Models\Diyetisyen as ModelsDiyetisyen;
 use App\Models\Ucret;
+use App\Models\Kullanici;
 use Illuminate\Http\Request;
 
 class UcretController extends Controller
@@ -43,7 +46,28 @@ class UcretController extends Controller
                 'message'=> 'ucret oluşturuldu'
             ],201);
     }
+    public function insert(Request $request)
+    { 
+        $user = Kullanici::where("token", $request->token)->first();
+        $diyetisyen = ModelsDiyetisyen::where("kullanici_id", $user->id)->first();
+        //veri tabanına kaydetme
+       $ucret = new Ucret();
+     
+       $ucret = new Ucret;
+       $ucret->baslangıc_tarihi = $request->baslangıc_tarihi;
+       $ucret->bitis_tarihi = $request->bitis_tarihi;
+       $ucret->ucret = $request->ucret;
+       $ucret->süre = $request->süre;
+       $ucret->seans = $request->seans;
+       $ucret->diyetisyen_id = $diyetisyen->id;
+      
+       $ucret->save();
 
+            return response([
+                'data' => $ucret,
+                'message'=> 'Ucret oluşturuldu'
+            ],201);
+    }
     /**
      * Display the specified resource.
      *
@@ -69,12 +93,15 @@ class UcretController extends Controller
      */
     public function update(Request $request, Ucret $ucret,$id)
     {
+        $user = Kullanici::where("token", $request->token)->first();
+        $diyetisyen = ModelsDiyetisyen::where("kullanici_id", $user->id)->first();
         $ucret = Ucret::find($id);
         $ucret->baslangıc_tarihi = $request->baslangıc_tarihi;
         $ucret->bitis_tarihi = $request->bitis_tarihi;
         $ucret->ucret = $request->ucret;
-        $ucret->periyot = $request->periyot;
-        $ucret->diyetisyen_id = $request->diyetisyen_id;
+        $ucret->süre = $request->süre;
+        $ucret->seans = $request->seans;
+        $ucret->diyetisyen_id = $diyetisyen->id;
         $ucret->save();
 
              return response([

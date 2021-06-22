@@ -18,15 +18,13 @@ class CreateRandevular extends Migration
             $table->collation = 'utf8mb4_turkish_ci';
             $table->engine = 'InnoDB';
             $table->id();
-            $table->string('tarih');
+            $table->string('tarih')->nullable();
+            $table->string('saat')->nullable();
             $table->integer('goruldu')->nullable();
-
-            $table->unsignedBigInteger('danisan_id');
+            $table->unsignedBigInteger('danisan_id')->nullable();
             $table->unsignedBigInteger('diyetisyen_id');
-            $table->unsignedBigInteger('saat_id');
             $table->foreign('danisan_id')->references('id')->on('danisanlar')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreign('diyetisyen_id')->references('id')->on('diyetisyenler')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreign('saat_id')->references('id')->on('saatler')->cascadeOnDelete()->cascadeOnUpdate();
 
 
         });

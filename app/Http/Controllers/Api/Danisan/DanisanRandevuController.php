@@ -32,12 +32,19 @@ class DanisanRandevuController extends Controller
         foreach ($saatler as $key => $saat) {
             $saatler[$key]->tarih = $request->tarih;
             $saatler[$key]->diyetisyen_id = $request->diyetisyen_id;
-            $sor = Randevu::where("saat_id", $saat->id)->where("tarih", $tarih)->first(); //bu tarih ve saate göre randevu eklenmiş mi?
-            if ($sor) {
-                $saatler[$key]->musait = 0; //dolu
-            } else {
-                $saatler[$key]->musait = 1; //boş
+
+            $sor = Randevu::where("tarih", $tarih)->where("off",1)->first(); //bu tarih ve saate göre randevu eklenmiş mi?
+            if($sor){
+                $saatler[$key]->musait = 0;
+            }else{
+                $sor = Randevu::where("saat_id", $saat->id)->where("tarih", $tarih)->first(); //bu tarih ve saate göre randevu eklenmiş mi?
+                if ($sor) {
+                    $saatler[$key]->musait = 0; //dolu
+                } else {
+                    $saatler[$key]->musait = 1; //boş
+                }
             }
+
 
             $diyetisyen = Diyetisyen::find($request->diyetisyen_id);
             if ($diyetisyen) {
@@ -56,25 +63,51 @@ class DanisanRandevuController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+
+ /*    public function store(Request $request)
     {
         $user = Kullanici::where("token", $request->token)->first();
         $danisan = Danisan::where("kullanici_id", $user->id)->first();
+       
         $input = $request->all(); //gelen tüm dataya erişim sağlar
         //veri tabanına kaydetme
         $randevu = new Randevu;
-        $randevu->tarih = $request->tarih;
-        $randevu->saat_id = $request->saat_id;
-        $randevu->danisan_id = $danisan->id;
-        $randevu->diyetisyen_id = $request->diyetisyen_id;
-        $sor=Randevu::where("saat_id", $request->saat_id)->where("tarih", $request->tarih)->first();
+        $diyetisyen=Diyetisyen::find($randevu->diyetisyen_id);
+        $sor=Randevu::where("saat", $request->saat)->where("tarih", $request->tarih)->first();
         if ($sor) {
             return response([
                 'message' => 'randevu oluşturulamadı saat ve tarih dolu'
             ], 201);
         } else {
+            $randevu->tarih = $request->tarih;
+            $randevu->saat = $request->saat;
+            $randevu->danisan_id = $danisan->id;
+            $randevu->diyetisyen_id = $request->diyetisyen_id;
             $randevu->save();
         }
+
+        return response([
+            'message' => 'randevu oluşturuldu'
+        ], 201);
+    }
+*/
+    public function store(Request $request)
+    {
+        $user = Kullanici::where("token", $request->token)->first();
+        $danisan = Danisan::where("kullanici_id", $user->id)->first();
+       
+        $input = $request->all(); //gelen tüm dataya erişim sağlar
+        //veri tabanına kaydetme
+        $randevu = new Randevu;
+        $diyetisyen=Diyetisyen::find($randevu->diyetisyen_id);
+      
+      
+            $randevu->tarih = $request->tarih;
+            $randevu->saat = $request->saat;
+            $randevu->danisan_id = $danisan->id;
+            $randevu->diyetisyen_id = $request->diyetisyen_id;
+            $randevu->save();
+    
 
         return response([
             'message' => 'randevu oluşturuldu'
@@ -91,7 +124,7 @@ class DanisanRandevuController extends Controller
     {
         $user = Kullanici::where("token", $request->token)->first();
         $danisan = Danisan::where("kullanici_id", $user->id)->first();
-        $randevular = Randevu::where("danisan_id",$danisan->id)->get();
+        $randevular = Randevu::where("danisan_id",$danisan->id)->first();
         
         if ($randevular->first()) {
 
@@ -105,6 +138,27 @@ class DanisanRandevuController extends Controller
         else
             return response(['message' => 'Randevu bulunamadi'], 404);
     }
+    public function list(Request $request)
+    {
+        $user=Kullanici::where("token",$request->token)->first();
+        $danisan = Danisan::where("kullanici_id",$user->id)->first();
+        $randevular = Randevu::where("danisan_id",$danisan->id)->first();
+
+        if($randevular->first()){
+            foreach($randevular as $key => $randevu){
+                $diyetisyen=Diyetisyen::find($randevular->diyetisyen_id);
+            if($diyetisyen){
+                $randevular->diyetisyen=$diyetisyen->adi;
+            }
+                
+        
+            }
+                return response()->json($randevular, 200);
+        }else{
+            return response(['message'=> 'randevu bulunamadi'],404);
+        }
+    }
+
 
     /**
      * Update the specified resource in storage.
@@ -116,8 +170,8 @@ class DanisanRandevuController extends Controller
     public function update(Request $request, Randevu $randevu, $id)
     {
         $randevu = Randevu::find($id);
-        $randevu->randevu_tarih = $request->randevu_tarih;
-        $randevu->randevu_saat = $request->randevu_saat;
+        $randevu->tarih = $request->tarih;
+        $randevu->saat = $request->saat;
         $randevu->danisan_id = $request->danisan_id;
         $randevu->diyetisyen_id = $request->diyetisyen_id;
         $randevu->save();
